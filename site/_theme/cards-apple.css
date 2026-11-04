@@ -1,0 +1,832 @@
+/* Site-wide card treatment after apple.com/tw/macbook-air (2026-11-01):
+   large continuous corners, no hairlines, no drop shadows; a card is only one tone
+   lighter than the paper it sits on, and on hover nothing lifts — the picture inside
+   eases up a few percent. V4 「精工」 warm palette kept. Loaded last on every page
+   by _build/tools/conversion.py. No entrance animations. */
+:root {
+  --ac-r: 28px; --ac-r-sm: 18px; --ac-card: #fff; --ac-well: #fff;
+  --ac-dark: rgba(254, 250, 224, .06); --ac-dark-hover: rgba(254, 250, 224, .1);
+  --ac-ease: cubic-bezier(.25, .1, .25, 1); --ac-zoom: 1.03;
+}
+@media (max-width: 767px) { :root { --ac-r: 22px; --ac-r-sm: 14px; } }
+
+/* ---------- listing cards: category, brand, news, cases ---------- */
+:is([data-id="917f340"], [data-id="438672d"], [data-id="7fad719"]) > .e-con-inner {
+  border: 0 !important; border-radius: var(--ac-r) !important; background: var(--ac-card) !important;
+  padding-bottom: 32px !important; gap: 12px !important;
+}
+:is([data-id="917f340"], [data-id="438672d"], [data-id="7fad719"]):hover > .e-con-inner { background: var(--ac-card) !important; }
+:is([data-id="917f340"], [data-id="438672d"], [data-id="7fad719"]) > .e-con-inner > .elementor-widget { padding-inline: 32px; }
+:is([data-id="917f340"], [data-id="438672d"], [data-id="7fad719"]) > .e-con-inner > .e-con:first-child { margin-bottom: 12px !important; }
+/* product photos sit whole on the white card instead of being cropped to the frame */
+[data-id="917f340"] [data-id="dd1e2df"],
+[data-id="917f340"] [data-id="dd1e2df"] > .elementor-motion-effects-container > .elementor-motion-effects-layer {
+  background-size: contain !important; background-position: center !important; background-repeat: no-repeat !important;
+  background-origin: content-box !important; background-color: var(--ac-well) !important;
+}
+[data-id="917f340"] [data-id="dd1e2df"] { padding: 28px 28px 0 !important; transition: transform .6s var(--ac-ease) !important; }
+/* material cards: a restoration made from the material fades in over the product shot on hover (gen.CARD_PICS) */
+[data-id="917f340"] [data-id="dd1e2df"]:has(> .st-card-after) { position: relative !important; overflow: hidden; }
+[data-id="917f340"] .st-card-after {
+  position: absolute; inset: 0; z-index: 1; pointer-events: none;
+  background-color: var(--ac-well); background-size: cover; background-position: center; background-repeat: no-repeat;
+  opacity: 0; transition: opacity .45s var(--ac-ease);
+}
+[data-id="917f340"]:is(:hover, :focus-within) .st-card-after { opacity: 1; }
+@media (hover: none) { [data-id="917f340"] .st-card-after { display: none; } }
+@media (prefers-reduced-motion: reduce) { [data-id="917f340"] .st-card-after { transition: none; } }
+:is([data-id="917f340"], [data-id="438672d"], [data-id="7fad719"]) .elementor-heading-title { font-size: 20px !important; }
+:is([data-id="917f340"], [data-id="438672d"], [data-id="7fad719"]) .elementor-button .elementor-button-text { letter-spacing: .04em; }
+
+/* ---------- home: service tiles on paper ---------- */
+.home [data-id="3a9896d"] > .elementor-widget .elementor-widget-container,
+.home [data-id="3a9896d"] > .elementor-widget + .elementor-widget .elementor-widget-container {
+  border: 0 !important; border-radius: var(--ac-r) !important; background: var(--ac-card) !important;
+  box-shadow: none !important; padding: 44px 30px 38px !important;
+}
+.home [data-id="3a9896d"] > .elementor-widget:hover .elementor-widget-container { box-shadow: none !important; }
+.home [data-id="3a9896d"] .elementor-icon-box-icon .elementor-icon { transition: transform .6s var(--ac-ease); }
+.home [data-id="3a9896d"] > .elementor-widget:hover .elementor-icon { transform: scale(1.06); }
+.home [data-id="3a9896d"] > .elementor-widget:hover h2.elementor-icon-box-title a { color: #334A33 !important; }
+
+/* ---------- home: process steps on the walnut band ---------- */
+.home [data-id="676bbaf"] .elementor-widget-container {
+  border: 0 !important; border-radius: var(--ac-r) !important; background: var(--ac-dark) !important;
+  padding: 34px 28px 30px !important; transition: background-color .4s var(--ac-ease) !important;
+}
+.home [data-id="676bbaf"] > .elementor-widget:hover .elementor-widget-container { background: var(--ac-dark-hover) !important; }
+/* 浮凸 on these cards: home.css zeroes their shadow and the rule above trims the transition to the background,
+   so the tilt snapped with every pointer move and the lift had no shadow under it. Give both back. */
+.home [data-id="676bbaf"] .elementor-widget-container.st-fx {
+  box-shadow: var(--fx-rest) !important;
+  transition: transform .55s var(--fx-ease), box-shadow .55s var(--fx-ease), background-color .4s var(--ac-ease) !important;
+}
+@media (hover: hover) {
+  .home [data-id="676bbaf"] > .elementor-widget:hover .elementor-widget-container.st-fx {
+    box-shadow: var(--fx-hover) !important;
+    transition: transform .25s ease-out, box-shadow .45s var(--fx-ease), background-color .4s var(--ac-ease) !important;
+  }
+}
+@media (max-width: 767px) { .home [data-id="676bbaf"] .elementor-widget-container { padding: 26px 22px 22px !important; } }
+
+/* ---------- home images that act as panels ---------- */
+.home [data-id="478bb36"] img { border-radius: var(--ac-r) !important; }
+
+/* ---------- courses (courses page and home 近期課程) ---------- */
+.st-course .elementor-post__card, .st-past-card { border: 0 !important; border-radius: var(--ac-r); background: var(--ac-card); }
+.st-course .elementor-post__thumbnail img, .st-past-card img { transition: transform .6s var(--ac-ease); }
+.st-course .elementor-post__thumbnail, .st-past-card > a, .st-past-card > img { overflow: hidden; }
+.st-course .elementor-post__card:hover .elementor-post__thumbnail img, .st-past-card:hover img { transform: scale(var(--ac-zoom)); }
+.st-course .elementor-post__text { padding: 28px 30px 32px; }
+.st-past-body { padding: 22px 26px 26px; }
+.st-course-btn.elementor-button, .st-course-closed { border-radius: 999px !important; }
+.st-course-empty { border-radius: var(--ac-r); }
+@media (min-width: 900px) {
+  .st-course-grid--single .st-course .elementor-post__thumbnail__link { background: var(--ac-card); }
+  .st-course-grid--single .st-course .elementor-post__text { padding: 44px 48px; }
+}
+
+/* ---------- product page ---------- */
+.st-pd-main { border: 0 !important; border-radius: var(--ac-r) !important; }
+.st-pd-thumb { border: 0 !important; border-radius: var(--ac-r-sm) !important; box-shadow: none; }
+.st-pd-thumb[aria-pressed="true"] { box-shadow: inset 0 0 0 2px var(--pd-chitose) !important; }
+.st-pd-point { border: 0 !important; border-radius: var(--ac-r-sm) !important; padding: 22px 20px !important; }
+.st-pd-fit { border-left: 0 !important; border-radius: var(--ac-r-sm); background: #fff !important; padding: 16px 20px !important; }
+.st-pd-ov-pic { border: 0 !important; border-radius: var(--ac-r) !important; }
+.st-pd-specs { border: 0 !important; border-radius: var(--ac-r) !important; padding: 12px 40px !important; }
+.st-pd-spec:last-child, .st-pd-specs > .st-pd-spec:nth-last-child(2):nth-child(odd) { border-bottom: 0; }
+
+/* features: a card with an official feature picture shows it across the top (user, 2026-11-01: 圖片必須在上側) */
+.st-pd-feat { border: 0 !important; border-radius: var(--ac-r) !important; padding: 40px 40px 36px !important; gap: 12px; }
+.st-pd-feat:hover { border-color: transparent !important; }
+.st-spot::before { display: none; }
+.st-pd-feat-art { order: -1; margin: -40px -40px 10px !important; border: 0 !important; background: var(--ac-well) !important; aspect-ratio: 16 / 8; overflow: hidden; }
+.st-pd-feat-art img { transition: transform .6s var(--ac-ease); }
+.st-pd-feat:hover .st-pd-feat-art img { transform: scale(var(--ac-zoom)); }
+.st-pd-feat h3 { font-size: 20px !important; }
+
+/* related: soft highlight keeps following the pointer, now with the same corners */
+.st-pd-rel-hl { border-radius: var(--ac-r) !important; }
+.st-pd-rel { padding: 16px 16px 24px !important; }
+.st-pd-rel-img { border: 0 !important; border-radius: calc(var(--ac-r) - 6px) !important; }
+.st-pd-rel-img img { transition: transform .6s var(--ac-ease); }
+.st-pd-rel:hover .st-pd-rel-img img { transform: scale(var(--ac-zoom)); }
+
+@media (max-width: 767px) {
+  .st-pd-feat { padding: 30px 26px 26px !important; }
+  .st-pd-feat-art { margin: -30px -26px 8px !important; }
+  .st-pd-specs { padding: 8px 22px !important; }
+  :is([data-id="917f340"], [data-id="438672d"], [data-id="7fad719"]) > .e-con-inner > .elementor-widget { padding-inline: 24px; }
+}
+@media (prefers-reduced-motion: reduce) {
+  .st-course .elementor-post__thumbnail img, .st-past-card img, .st-pd-feat-art img, .st-pd-rel-img img,
+  .home [data-id="3a9896d"] .elementor-icon, [data-id="917f340"] [data-id="dd1e2df"] { transition: none !important; transform: none !important; }
+}
+
+/* ---------- home: three-point icon row and the two photo panels ---------- */
+.home [data-id="a997ef2"] .elementor-icon-list-items { gap: 12px !important; border: 0 !important; }
+.home [data-id="a997ef2"] .elementor-icon-list-item { border: 0 !important; border-radius: var(--ac-r-sm) !important; background: var(--ac-card) !important; padding: 26px 14px 24px !important; }
+.home [data-id="a997ef2"] .elementor-icon-list-item::before, .home [data-id="a997ef2"] .elementor-icon-list-item::after { display: none !important; }
+.home :is([data-id="613edb5"], [data-id="05b7d75"]) { border-radius: var(--ac-r) !important; overflow: hidden; }
+.home :is([data-id="613edb5"], [data-id="05b7d75"]) > .elementor-motion-effects-container { border-radius: inherit; }
+
+/* ---------- every other card on the site: same corners ---------- */
+[data-eael-wrapper-link]:not([data-id="dd1e2df"]):not([data-id="222be35"]):not([data-id="1f59c74"]):not([data-id="af9a821"]):not([data-id="762d74c"]),
+:is([data-id="ef444fb"], [data-id="a139c3a"], [data-id="1b4d68b"], [data-id="9fe6a82"], [data-id="62e0be4"], [data-id="c82cbce"], [data-id="ced8c83"], [data-id="01ce972"], [data-id="b968146"], [data-id="0aafbab"], [data-id="b810438"]),
+[data-id="fa7235b"] > .e-con, [data-id="fa7235b"] > .e-con-inner > .e-con,
+:is([data-id="9022bdb"], [data-id="4715f84"], [data-id="ce4d6f1"], [data-id="64b7d34"], [data-id="4c85e4a"], [data-id="1ddc969"]) {
+  border-radius: var(--ac-r) !important; overflow: hidden;
+}
+:is([data-eael-wrapper-link], [data-id="9022bdb"], [data-id="4715f84"], [data-id="ce4d6f1"], [data-id="64b7d34"], [data-id="4c85e4a"], [data-id="1ddc969"]) > .elementor-motion-effects-container { border-radius: inherit; }
+:is([data-id="ef444fb"], [data-id="a139c3a"]) .elementor-widget-icon-box > .elementor-widget-container { border-radius: var(--ac-r-sm) !important; }
+:is([data-id="2673b5f"], [data-id="0fc641e"], [data-id="0d8ebee"], [data-id="4d090e1"], [data-id="1cc7ccb"], [data-id="94f7813"], [data-id="2f67f8d"], [data-id="dca59de"], [data-id="1a04962"]) { border-radius: var(--ac-r-sm) !important; overflow: hidden; }
+:is([data-id="7c38539"], [data-id="05502fb"], [data-id="f41275d"], [data-id="c41acad"]) img { border-radius: var(--ac-r-sm); }
+/* thumbnails at the top of news / case cards fill the card's rounded top */
+:is([data-id="1f59c74"], [data-id="222be35"]) { border-radius: 0 !important; }
+[data-id="c812c27"] .gallery-item { border-radius: var(--ac-r-sm); background: #fff; padding: 14px 14px 16px; }
+[data-id="c812c27"] img { border: 0 !important; border-radius: 8px; }
+[data-id="fa7235b"] > .e-con, [data-id="fa7235b"] > .e-con-inner > .e-con { background-color: var(--ac-card); }
+
+/* ---------- 浮凸: relief at rest, lift + deeper shadow on hover (tagged by cards-fx.js) ---------- */
+:root {
+  --fx-rest: 0 1px 1px rgba(42, 29, 20, .04), 0 8px 18px -10px rgba(42, 29, 20, .14), inset 0 1px 0 rgba(255, 255, 255, .75);
+  --fx-hover: 0 2px 4px rgba(42, 29, 20, .05), 0 30px 50px -20px rgba(42, 29, 20, .30), inset 0 1px 0 rgba(255, 255, 255, .85);
+  --fx-ease: cubic-bezier(.2, .8, .2, 1);
+}
+.st-fx {
+  position: relative;
+  box-shadow: var(--fx-rest) !important;
+  transform: perspective(1000px) translateY(var(--fx-y, 0px)) rotateX(var(--fx-rx, 0deg)) rotateY(var(--fx-ry, 0deg)) !important;
+  transition: transform .55s var(--fx-ease), box-shadow .55s var(--fx-ease), background-color .4s var(--ac-ease) !important;
+}
+.st-fx--dark {
+  --fx-rest: 0 12px 26px -14px rgba(0, 0, 0, .55), inset 0 1px 0 rgba(254, 250, 224, .08);
+  --fx-hover: 0 34px 56px -20px rgba(0, 0, 0, .7), inset 0 1px 0 rgba(254, 250, 224, .14);
+}
+@media (hover: hover) {
+  .st-fx:hover {
+    --fx-y: -8px; z-index: 2; box-shadow: var(--fx-hover) !important;
+    transition: transform .25s ease-out, box-shadow .45s var(--fx-ease), background-color .4s var(--ac-ease) !important;
+  }
+}
+/* related products used a sliding highlight; each card now rises on its own */
+.st-pd-rel-hl { display: none !important; }
+.st-pd-rel.st-fx { background: var(--ac-card); border-radius: var(--ac-r); }
+.st-pd-rel-grid { gap: 16px !important; }
+@media (prefers-reduced-motion: reduce) {
+  .st-fx, .st-fx:hover { transform: none !important; transition: box-shadow .2s !important; }
+}
+/* linked Elementor cards: no hairline, the relief shadow does the work */
+.st-fx[data-eael-wrapper-link] { border: 0 !important; }
+.st-fx[data-eael-wrapper-link]:has(.st-brand-logo) { background-color: var(--ac-card) !important; }
+.elementor-2656 [data-id="caff39e"] .e-con.st-fx[data-eael-wrapper-link],
+.elementor-2656 [data-id="caff39e"] .e-con.st-fx[data-eael-wrapper-link]:hover { border: 0 !important; background: var(--ac-card) !important; }
+
+/* ---------- brand pages: 「三大特色」 icon boxes ---------- */
+[data-id="ff5d5a5"] { align-items: stretch !important; gap: 20px !important; }
+[data-id="ff5d5a5"] > .elementor-widget { display: flex; }
+[data-id="ff5d5a5"] > .elementor-widget > .elementor-widget-container {
+  flex: 1; height: 100%; border: 0 !important; border-radius: var(--ac-r) !important;
+  background: var(--ac-card) !important; padding: 44px 32px 40px !important;
+}
+
+/* ---------- header language switcher: a small panel right under the globe ---------- */
+.elementor-nav-menu--main li.btn-lang-img > ul.sub-menu {
+  left: auto !important; right: 0 !important; margin-left: 0 !important; min-width: 112px !important; width: auto !important;
+  padding: 6px !important; background: #fff !important; border: 0 !important; border-radius: 14px !important;
+  box-shadow: 0 2px 4px rgba(42, 29, 20, .06), 0 18px 36px -14px rgba(42, 29, 20, .28) !important;
+}
+.elementor-nav-menu--main li.btn-lang-img > ul.sub-menu a { justify-content: center; border-radius: 10px; padding: 10px 16px !important; }
+.elementor-nav-menu--main li.btn-lang-img > ul.sub-menu a:hover, .elementor-nav-menu--main li.btn-lang-img > ul.sub-menu .current-lang > a { background: #EDECE7 !important; }
+
+/* ---------- one size per card group (2026-11-01) ---------- */
+/* listing loops: every row is already 1fr; let the card fill its grid cell, and pin the link to the bottom */
+.e-loop-item:has(> .elementor-section-wrap > :is([data-id="917f340"], [data-id="438672d"], [data-id="7fad719"])) > .elementor-section-wrap,
+.e-loop-item > .elementor-section-wrap > :is([data-id="917f340"], [data-id="438672d"], [data-id="7fad719"]),
+:is([data-id="917f340"], [data-id="438672d"], [data-id="7fad719"]) > .e-con-inner { height: 100% !important; }
+.elementor-loop-container:has(:is([data-id="917f340"], [data-id="438672d"], [data-id="7fad719"])) { grid-auto-rows: 1fr !important; }
+:is([data-id="917f340"], [data-id="438672d"], [data-id="7fad719"]) > .e-con-inner > .elementor-widget-button:last-child { margin-top: auto !important; }
+
+/* products overview mosaic: the two tiles in the top row share the width evenly */
+[data-id="d61e639"] > .e-con { flex: 1 1 0 !important; width: auto !important; max-width: none !important; }
+
+/* product-page features: equal cells instead of a mixed-span bento */
+.st-pd-bento { grid-template-columns: repeat(3, minmax(0, 1fr)) !important; grid-auto-rows: 1fr; }
+.st-pd-bento > .st-pd-feat { grid-column: auto !important; }
+/* with feature pictures in the grid, rows size to their own content: a row of text-only cards stays compact */
+.st-pd-bento:has(.st-pd-feat-art) { grid-auto-rows: auto; }
+.st-pd-bento:has(> :nth-child(2):last-child), .st-pd-bento:has(> :nth-child(4):last-child) { grid-template-columns: repeat(2, minmax(0, 1fr)) !important; }
+.st-pd-bento:has(> :only-child) { grid-template-columns: minmax(0, 1fr) !important; }
+@media (max-width: 1024px) { .st-pd-bento, .st-pd-bento:has(> :nth-child(2):last-child) { grid-template-columns: repeat(2, minmax(0, 1fr)) !important; } }
+@media (max-width: 767px) { .st-pd-bento, .st-pd-bento:has(> :nth-child(2):last-child), .st-pd-bento:has(> :nth-child(4):last-child) { grid-template-columns: minmax(0, 1fr) !important; } }
+/* home process steps: equal widths at every size; a short last row is centred instead of stretched */
+@media (max-width: 1100px) and (min-width: 768px) {
+  .home [data-id="676bbaf"] > .elementor-widget, .home [data-id="676bbaf"] > .elementor-widget:nth-child(n+4) { grid-column: span 2 !important; }
+  .home [data-id="676bbaf"] > .elementor-widget:nth-child(4) { grid-column: 2 / span 2 !important; }
+}
+@media (max-width: 767px) and (min-width: 561px) {
+  .home [data-id="676bbaf"] { grid-template-columns: repeat(4, 1fr) !important; }
+  .home [data-id="676bbaf"] > .elementor-widget { grid-column: span 2 !important; }
+  .home [data-id="676bbaf"] > .elementor-widget:last-child { grid-column: 2 / span 2 !important; }
+}
+
+/* ---------- key points (.st-points): three cards, no ruled lines, at every width ---------- */
+.st-points ul.elementor-icon-list-items { gap: 16px !important; border: 0 !important; margin: 8px 0 !important; }
+.st-points .elementor-icon-list-item,
+.st-points .elementor-icon-list-item + .elementor-icon-list-item {
+  border: 0 !important; border-radius: var(--ac-r) !important; background: var(--ac-card) !important; padding: 32px 18px 28px !important;
+}
+.st-points .elementor-icon-list-item::before, .st-points .elementor-icon-list-item::after { display: none !important; }
+.st-points .elementor-icon-list-icon { border: 0 !important; background: #EDECE7; }
+@media (max-width: 640px) {
+  .st-points ul.elementor-icon-list-items { gap: 12px !important; }
+  .st-points .elementor-icon-list-item, .st-points .elementor-icon-list-item + .elementor-icon-list-item { padding: 20px 22px !important; border-radius: var(--ac-r-sm) !important; }
+}
+
+/* ---------- buttons: a touch rounder, lift + light sweep on hover (tagged .st-btn by cards-fx.js) ---------- */
+:is(body) .st-btn.st-btn { border-radius: 12px !important; position: relative; overflow: hidden; isolation: isolate;
+  transition: transform .25s var(--fx-ease), box-shadow .35s var(--fx-ease), background-color .25s, color .25s, border-color .25s !important; }
+:is(body) .st-btn.st-btn::after {
+  content: ""; position: absolute; inset: 0; z-index: -1; pointer-events: none; border-radius: inherit;
+  background: linear-gradient(105deg, transparent 30%, rgba(255, 255, 255, .38) 48%, transparent 66%);
+  transform: translateX(-120%); transition: transform .7s var(--fx-ease);
+}
+@media (hover: hover) {
+  :is(body) .st-btn.st-btn:hover { transform: translateY(-2px); box-shadow: 0 12px 24px -12px rgba(18, 16, 15, .45) !important; }
+  :is(body) .st-btn.st-btn:hover::after { transform: translateX(120%); }
+}
+:is(body) .st-btn.st-btn:active { transform: translateY(0) scale(.98); }
+.home [data-id="3ce8a46"] .elementor-button.st-btn { border-radius: 12px !important; }
+@media (prefers-reduced-motion: reduce) { :is(body) .st-btn.st-btn, :is(body) .st-btn.st-btn::after { transition: none !important; } :is(body) .st-btn.st-btn:hover { transform: none; } }
+
+/* ---------- every content image gets rounded corners (logos, icons and edge-to-edge card pictures excepted) ---------- */
+#content img:not([src*="logo"]):not([class*="logo"]):not([src$=".svg"]):not([src*="btn_line"]):not(.emoji) { border-radius: var(--ac-r-sm); }
+#content :is(.st-course .elementor-post__thumbnail, .st-past-card, .st-pd-feat-art, .st-pd-main, .st-pd-ov-pic, .st-pd-rel-img, .st-pd-thumb, .st-brand-tile, .elementor-post__thumbnail) img { border-radius: 0 !important; }
+#content :is([data-id="7c38539"], [data-id="05502fb"], [data-id="f41275d"], [data-id="c41acad"]) img { border-radius: var(--ac-r-sm) !important; }
+#content [data-id="478bb36"] img { border-radius: var(--ac-r) !important; }
+/* header 「聯絡我們」 matches the other buttons */
+.elementor-nav-menu li.btn-contact > a.elementor-item, .elementor-location-header .elementor-button { border-radius: 12px !important; }
+/* green tab titles (services 北區/中區…) and the current page number match the 12px buttons */
+.e-n-tab-title { border-radius: 12px !important; }
+.page-numbers { border-radius: 10px !important; }
+
+/* about: licence cards — even 4-up grid with gaps, certificates at their own A4 proportion */
+[data-id="c812c27"] .gallery { display: grid !important; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 24px; margin: 0 !important; }
+[data-id="c812c27"] .gallery > br { display: none; }
+[data-id="c812c27"] .gallery-item { width: auto !important; max-width: none !important; margin: 0 !important; box-sizing: border-box; padding: 18px 18px 22px !important; display: flex; flex-direction: column; }
+[data-id="c812c27"] .gallery-item .gallery-icon { margin: 0; }
+[data-id="c812c27"] .gallery-item img { width: 100% !important; height: auto !important; aspect-ratio: 300 / 424; object-fit: contain !important; object-position: center !important; background: #F6F5F2; padding: 0 !important; border-radius: 10px !important; }
+[data-id="c812c27"] .gallery-caption { padding: 16px 4px 0 !important; }
+@media (max-width: 1024px) { [data-id="c812c27"] .gallery { grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 16px; } }
+@media (max-width: 480px) { [data-id="c812c27"] .gallery { gap: 12px; } [data-id="c812c27"] .gallery-item { padding: 12px 12px 16px !important; } }
+
+/* ---------- 最新消息 from Facebook (news.py) ---------- */
+.st-news { width: 100%; }
+.st-news-tabs { display: flex; flex-wrap: wrap; justify-content: center; gap: 8px; margin: 0 0 40px; }
+.st-news-tab { padding: 9px 22px; border-radius: 999px; font-size: 15px; letter-spacing: .06em; color: #334A33; background: #fff; text-decoration: none; transition: background-color .25s, color .25s; }
+.st-news-tab:hover { background: #EDECE7; }
+.st-news-tab.is-on { background: #334A33; color: #F6F5F2; }
+.st-news-grid { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 24px; }
+.st-news-card { display: flex; flex-direction: column; overflow: hidden; background: var(--ac-card); border-radius: var(--ac-r); text-decoration: none; color: inherit; }
+.st-news-img { display: block; aspect-ratio: 4 / 3; background: #EDECE7; overflow: hidden; }
+.st-news-img img { width: 100%; height: 100%; object-fit: cover; display: block; border-radius: 0 !important; transition: transform .6s var(--ac-ease); }
+.st-news-card:hover .st-news-img img { transform: scale(var(--ac-zoom)); }
+.st-news-text { display: flex; flex-direction: column; gap: 10px; padding: 24px 26px 28px; flex: 1; }
+.st-news-meta { font-family: Montserrat, "Noto Sans TC", sans-serif; font-size: 13px; letter-spacing: .08em; color: #6B6458; }
+.st-news-title { font-size: 19px; font-weight: 500; line-height: 1.5; letter-spacing: .04em; color: #12100F; display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical; overflow: hidden; }
+.st-news-excerpt { font-size: 14px; line-height: 1.8; color: #4A463F; display: -webkit-box; -webkit-line-clamp: 3; -webkit-box-orient: vertical; overflow: hidden; }
+.st-news-more { margin-top: auto; padding-top: 6px; font-size: 14px; color: #334A33; }
+.st-news-more::after { content: " →"; }
+.st-news-empty { text-align: center; padding: 48px 24px; background: #fff; border-radius: var(--ac-r); color: #4A463F; }
+@media (max-width: 1024px) { .st-news-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); } }
+@media (max-width: 640px) { .st-news-grid { grid-template-columns: minmax(0, 1fr); gap: 16px; } .st-news-tabs { margin-bottom: 28px; } }
+/* single post body */
+.st-news-body p { margin: 0 0 1.1em; font-size: 16px; line-height: 1.95; color: #2B2824; }
+.st-news-body a { color: #334A33; text-decoration: underline; text-underline-offset: 3px; word-break: break-all; }
+.st-news-fig { margin: 28px 0; }
+.st-news-fig img { width: 100%; height: auto; display: block; }
+.st-news-src { margin-top: 32px !important; padding-top: 18px; border-top: 1px solid #DDD9D0; font-size: 14px !important; color: #6B6458 !important; }
+.st-news-body { max-width: 760px; margin: 0 auto; }
+.st-news-body .st-news-fig img { border-radius: var(--ac-r-sm) !important; }
+
+/* icon-title + paragraph pairs (services, support): cards (conversion.pair_cards) */
+.st-pair-grid { display: grid !important; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 20px !important; align-items: stretch; }
+.st-pair-grid--3 { grid-template-columns: repeat(3, minmax(0, 1fr)); }
+.st-pair-card { display: flex; flex-direction: column; gap: 14px; padding: 34px 32px 32px; background: var(--ac-card); border-radius: var(--ac-r); }
+.st-pair-card > .elementor-widget { margin: 0 !important; width: 100% !important; }
+.st-pair-card .elementor-icon-list-items { margin: 0 !important; padding: 0 !important; }
+.st-pair-card .elementor-icon-list-item { padding: 0 !important; border: 0 !important; }
+.st-pair-card .elementor-icon-list-icon { width: 46px; height: 46px; flex: none; display: grid !important; place-items: center; border-radius: 14px; background: #EDECE7; margin-right: 14px !important; }
+.st-pair-card .elementor-icon-list-icon svg, .st-pair-card .elementor-icon-list-icon i { width: 20px !important; height: 20px !important; font-size: 20px !important; }
+.st-pair-card .elementor-icon-list-text { font-size: 19px !important; font-weight: 500 !important; letter-spacing: .04em; }
+.st-pair-card .elementor-widget-text-editor p { margin: 0; font-size: 15px; line-height: 1.85; color: #4A463F; }
+@media (max-width: 1024px) { .st-pair-grid--3 { grid-template-columns: repeat(2, minmax(0, 1fr)); } .st-pair-grid--3 > .st-pair-card:last-child { grid-column: 1 / -1; } }
+@media (max-width: 640px) { .st-pair-grid, .st-pair-grid--3 { grid-template-columns: minmax(0, 1fr); gap: 12px !important; } .st-pair-grid--3 > .st-pair-card:last-child { grid-column: auto; } .st-pair-card { padding: 26px 24px; } }
+/* pair cards follow the room they get: narrow columns stack instead of squeezing three across */
+.st-pair-grid, .st-pair-grid--3 { grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)) !important; }
+.st-pair-grid--3 > .st-pair-card:last-child { grid-column: auto !important; }
+
+/* English page (content_fixes.EN) */
+.st-en { max-width: 1120px; margin: 0 auto; padding: clamp(120px, 12vw, 170px) 20px 96px; font-family: "Montserrat", "Noto Sans TC", sans-serif; color: #12100F; }
+.st-en-eyebrow { margin: 0 0 14px; font-size: 13px; letter-spacing: .2em; text-transform: uppercase; color: #62B320; }
+.st-en-title { margin: 0; font-size: clamp(32px, 4.4vw, 56px); font-weight: 400; line-height: 1.2; letter-spacing: .01em; color: #334A33; text-wrap: balance; }
+.st-en-lead { margin: 22px 0 0; max-width: 46em; font-size: 17px; line-height: 1.8; color: #4A463F; }
+.st-en-grid { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 20px; margin: 48px 0 56px; }
+.st-en-card { padding: 32px 30px; background: #fff; border-radius: var(--ac-r); }
+.st-en-card h2, .st-en-sub, .st-en-contact h2 { margin: 0 0 10px; font-size: 20px; font-weight: 500; color: #12100F; }
+.st-en-card p { margin: 0; font-size: 15px; line-height: 1.75; color: #4A463F; }
+.st-en-brands { margin: 0 0 48px; font-size: 16px; line-height: 2; color: #334A33; }
+.st-en-contact { padding: 32px 30px; background: #fff; border-radius: var(--ac-r); }
+.st-en-contact p { margin: 4px 0; font-size: 15px; line-height: 1.8; color: #4A463F; }
+.st-en-contact a { color: #334A33; }
+.st-en-note { margin-top: 14px !important; font-size: 14px !important; color: #6B6458 !important; }
+@media (max-width: 900px) { .st-en-grid { grid-template-columns: minmax(0, 1fr); } }
+
+/* ---------- 2026-11-01 full-site UI/UX check ---------- */
+/* nothing may push the page sideways (product pages: the phone menu was 14px wider than the screen) */
+html, body { overflow-x: clip; }
+.elementor-nav-menu--dropdown.elementor-nav-menu__container { max-width: 100vw; box-sizing: border-box; }
+
+/* leftover square panels → same corners as every other card */
+:is([data-id="5647413"], [data-id="e7a50b1"], [data-id="6122fbc"], [data-id="e835fdc"], [data-id="2aaa3c3"]) {
+  border-radius: var(--ac-r) !important; overflow: hidden;
+}
+:is([data-id="5647413"], [data-id="e7a50b1"], [data-id="6122fbc"], [data-id="e835fdc"], [data-id="2aaa3c3"]) > .elementor-motion-effects-container { border-radius: inherit; }
+
+/* readable small print */
+.elementor-location-footer :is(p, span, a, li, div) { font-size: max(13px, 1em); }
+.elementor-location-footer .elementor-widget-text-editor, .elementor-location-footer .elementor-widget-text-editor p { font-size: 13px !important; }
+
+/* touch targets: at least 44px tall on phones and tablets */
+@media (max-width: 1024px) {
+  .elementor-button, .st-btn, .st-pd-btn, .st-inq-btn, .st-course-btn { min-height: 44px; display: inline-flex !important; align-items: center; justify-content: center; }
+  .elementor-location-footer .elementor-icon-list-item > a,
+  .elementor-location-footer .elementor-icon-list-item { min-height: 44px; display: flex !important; align-items: center; }
+  :is([data-id="917f340"], [data-id="438672d"], [data-id="7fad719"]) .elementor-button { min-height: 44px; padding-block: 10px !important; }
+  .st-crumb a, .elementor-post-info a { display: inline-flex; align-items: center; min-height: 44px; }
+  [data-id="fa7235b"] .elementor-button, [data-id="49baf9f"] .elementor-button { min-height: 44px; }
+}
+@media (max-width: 1024px) {
+  .elementor-widget-icon-list .elementor-icon-list-item > a { min-height: 44px; display: inline-flex !important; align-items: center; }
+  .st-pd-brand { display: inline-flex; align-items: center; min-height: 44px; }
+  .elementor-swiper-button { min-width: 44px; min-height: 44px; display: inline-flex !important; align-items: center; justify-content: center; }
+}
+.eael-team-member-social-link a { min-width: 44px; min-height: 44px; display: inline-flex !important; align-items: center; justify-content: center; }
+
+/* home workflow band: four steps after 當日戴入黏固 was removed */
+.home [data-id="676bbaf"] { grid-template-columns: repeat(4, minmax(0, 1fr)) !important; }
+.home [data-id="676bbaf"] > .elementor-widget, .home [data-id="676bbaf"] > .elementor-widget:nth-child(n) { grid-column: auto !important; }
+@media (max-width: 1100px) { .home [data-id="676bbaf"] { grid-template-columns: repeat(2, minmax(0, 1fr)) !important; } }
+@media (max-width: 560px) { .home [data-id="676bbaf"] { grid-template-columns: minmax(0, 1fr) !important; } }
+.wpcf7-response-output.st-form-bad { color: #9A2B1F; }
+.wpcf7-form [aria-invalid="true"] { border-color: #C0563F !important; }
+
+/* course poster lightbox (poster-lightbox.js) */
+.st-lightbox { position: fixed; inset: 0; z-index: 100000; display: grid; place-items: center; padding: 56px 20px 24px; background: rgba(18, 16, 15, .86); }
+.st-lightbox[hidden] { display: none; }
+.st-lightbox-img { max-width: min(92vw, 900px); max-height: calc(100vh - 96px); width: auto; height: auto; object-fit: contain; border-radius: var(--ac-r-sm) !important; box-shadow: 0 24px 60px -20px rgba(0, 0, 0, .6); background: #fff; }
+.st-lightbox-close { position: absolute; top: 14px; right: 16px; width: 44px; height: 44px; border: 0; border-radius: 999px; background: rgba(255, 255, 255, .14); color: #fff; font-size: 28px; line-height: 1; cursor: pointer; }
+.st-lightbox-close:hover, .st-lightbox-close:focus-visible { background: rgba(255, 255, 255, .26); outline: none; }
+html.st-lightbox-on { overflow: hidden; }
+[data-st-poster] { cursor: zoom-in; }
+
+/* ---------- 牙科產品「依流程搭配設備與材料」 (content_fixes.workflow + workflow-steps.js) ---------- */
+.st-wf { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 14px; width: 100%; margin-top: 8px; counter-reset: wf; }
+.st-wf-item { display: contents; }
+.st-wf-tab {
+  grid-row: 1; position: relative; display: flex; flex-direction: column; align-items: flex-start; gap: 6px; min-height: 132px;
+  padding: 22px 22px 18px; border: 0; border-radius: var(--ac-r-sm); background: #fff; color: #12100F; text-align: left; cursor: pointer;
+  box-shadow: var(--fx-rest); transition: transform .25s var(--fx-ease), box-shadow .3s, background-color .25s, color .25s; font-family: inherit;
+}
+.st-wf-tab:hover { transform: translateY(-3px); box-shadow: var(--fx-hover); }
+.st-wf-tab:focus-visible { outline: 2px solid #62B320; outline-offset: 3px; }
+.st-wf-num { font: 300 30px/1 "Montserrat", sans-serif; color: #62B320; letter-spacing: .02em; }
+.st-wf-name { font-size: 17px; font-weight: 500; line-height: 1.45; letter-spacing: .04em; }
+.st-wf-hint { margin-top: auto; font-size: 13px; letter-spacing: .06em; color: #6B6458; }
+.st-wf-hint::after { content: " →"; }
+/* steps joined into one process: a connector between neighbouring cards */
+.st-wf-item + .st-wf-item .st-wf-tab::before {
+  content: ""; position: absolute; left: -14px; top: 40px; width: 14px; height: 2px; background: #C9C4B8;
+}
+.st-wf-item.is-open .st-wf-tab { background: #334A33; color: #F6F5F2; box-shadow: 0 18px 34px -18px rgba(51, 74, 51, .7); }
+.st-wf-item.is-open .st-wf-num { color: #B2E901; }
+.st-wf-item.is-open .st-wf-hint { color: rgba(246, 245, 242, .75); }
+.st-wf-item.is-open .st-wf-hint::after { content: " ↓"; }
+/* little pointer from the open step down to its panel */
+.st-wf-item.is-open .st-wf-tab::after {
+  content: ""; position: absolute; left: 32px; bottom: -9px; width: 18px; height: 18px; background: #334A33; transform: rotate(45deg); border-radius: 3px;
+}
+.st-wf-panel {
+  grid-row: 2; grid-column: 1 / -1; display: grid; grid-template-columns: minmax(0, 1.05fr) minmax(0, .95fr); gap: 36px; align-items: center;
+  margin-top: 10px; padding: 40px 44px; background: #fff; border-radius: var(--ac-r); box-shadow: var(--fx-rest);
+}
+.st-wf-panel[hidden] { display: none; }
+.st-wf-step { margin: 0 0 8px; font: 500 12px/1 "Montserrat", sans-serif; letter-spacing: .2em; color: #62B320; }
+.st-wf-copy h3 { margin: 0; font-size: 26px; font-weight: 400; letter-spacing: .06em; color: #334A33; }
+.st-wf-desc { margin: 14px 0 22px; font-size: 15px; line-height: 1.9; color: #4A463F; }
+.st-wf-group { margin-bottom: 18px; }
+.st-wf-group h4 { margin: 0 0 10px; font-size: 13px; font-weight: 500; letter-spacing: .12em; color: #6B6458; }
+.st-wf-chips { display: flex; flex-wrap: wrap; gap: 8px; }
+.st-wf-chip {
+  display: inline-flex; align-items: center; min-height: 38px; padding: 6px 14px; border-radius: 999px; background: #F2F0EA; color: #12100F;
+  font-size: 14px; line-height: 1.3; text-decoration: none; transition: background-color .2s, color .2s;
+}
+.st-wf-chip::after { content: "›"; margin-left: 8px; color: #8A8478; }
+.st-wf-chip:hover, .st-wf-chip:focus-visible { background: #334A33; color: #F6F5F2; outline: none; }
+.st-wf-chip:hover::after { color: #B2E901; }
+.st-wf-cta { margin-top: 8px; }
+.st-wf-pic { margin: 0; aspect-ratio: 4 / 3; border-radius: var(--ac-r-sm); overflow: hidden; background: #F6F5F2; }
+.st-wf-pic img { width: 100%; height: 100%; display: block; border-radius: 0 !important; }
+.st-wf-pic--cover img { object-fit: cover; }
+.st-wf-pic--contain { background: #fff; }
+.st-wf-pic--contain img { object-fit: contain; padding: 6%; }
+
+@media (max-width: 1024px) {
+  .st-wf-panel { grid-template-columns: minmax(0, 1fr); padding: 32px 30px; }
+  .st-wf-pic { order: -1; max-width: 520px; }
+  .st-wf-tab { min-height: 120px; padding: 18px 16px 16px; }
+  .st-wf-name { font-size: 15px; }
+}
+/* phones: an accordion, each step opens right under itself */
+@media (max-width: 767px) {
+  .st-wf { display: block; }
+  .st-wf-item { display: block; margin-bottom: 12px; }
+  .st-wf-tab { width: 100%; min-height: 0; flex-direction: row; align-items: center; gap: 14px; padding: 18px 20px; }
+  .st-wf-num { font-size: 24px; flex: none; }
+  .st-wf-name { flex: 1; }
+  .st-wf-hint { margin: 0; font-size: 12px; }
+  .st-wf-item + .st-wf-item .st-wf-tab::before { display: none; }
+  .st-wf-item.is-open .st-wf-tab { border-radius: var(--ac-r-sm) var(--ac-r-sm) 0 0; box-shadow: none; }
+  .st-wf-item.is-open .st-wf-tab::after { display: none; }
+  .st-wf-panel { margin-top: 0; padding: 22px 20px 26px; border-radius: 0 0 var(--ac-r-sm) var(--ac-r-sm); gap: 18px; }
+  .st-wf-copy h3 { font-size: 22px; }
+  .st-wf-cta { width: 100%; }
+}
+@media (prefers-reduced-motion: reduce) { .st-wf-tab { transition: none; } .st-wf-tab:hover { transform: none; } }
+/* the theme styles every <button>; the workflow steps keep their own look */
+:is(body) .st-wf button.st-wf-tab, :is(body) .st-wf button.st-wf-tab:hover, :is(body) .st-wf button.st-wf-tab:focus {
+  border: 0 !important; border-radius: var(--ac-r-sm) !important; background: #fff !important; color: #12100F !important;
+  padding: 22px 22px 18px !important; font-family: inherit !important; font-size: inherit !important; font-weight: inherit !important;
+  text-transform: none !important; letter-spacing: normal !important; line-height: 1.4 !important;
+}
+:is(body) .st-wf .st-wf-item.is-open button.st-wf-tab { background: #334A33 !important; color: #F6F5F2 !important; }
+@media (max-width: 767px) {
+  :is(body) .st-wf button.st-wf-tab, :is(body) .st-wf button.st-wf-tab:hover, :is(body) .st-wf button.st-wf-tab:focus { padding: 18px 20px !important; }
+  :is(body) .st-wf .st-wf-item.is-open button.st-wf-tab { border-radius: var(--ac-r-sm) var(--ac-r-sm) 0 0 !important; }
+}
+
+/* 牙科產品「常見產品品項」 mosaic: phones get one full-width card per category instead of two narrow columns */
+@media (max-width: 767px) {
+  :is([data-id="d61e639"], [data-id="e719afe"], [data-id="652abf5"]) { flex-direction: column !important; flex-wrap: nowrap !important; gap: 12px !important; }
+  :is([data-id="7cc6d9f"], [data-id="2ee2aa0"], [data-id="4f195b6"], [data-id="e99cef6"], [data-id="d9ef482"], [data-id="1d69e4e"], [data-id="e7f0835"]) {
+    width: 100% !important; max-width: 100% !important; flex: none !important; min-height: 0 !important;
+  }
+  :is([data-id="e25c235"], [data-id="4d37de1"], [data-id="6ed38e4"], [data-id="4393eef"], [data-id="b1c8c43"], [data-id="c979324"], [data-id="2451da2"]) {
+    width: 100% !important; height: auto !important; min-height: 0 !important; aspect-ratio: 16 / 10;
+  }
+  :is([data-id="e25c235"], [data-id="4d37de1"], [data-id="6ed38e4"], [data-id="4393eef"], [data-id="b1c8c43"], [data-id="c979324"], [data-id="2451da2"]) .elementor-heading-title {
+    font-size: 22px !important; line-height: 1.4 !important; white-space: nowrap;
+  }
+  [data-id="7853bd4"] { gap: 12px !important; }
+}
+@media (max-width: 767px) {
+  [data-id="7853bd4"] [data-id="d61e639"] > .e-con { flex: none !important; width: 100% !important; }
+}
+
+/* 牙科產品 mosaic tile pictures: gen.fix_hub (st-hub-tiles), one per category (2026-11-03) */
+
+/* wrapper-link cards (brand tiles etc.): the link covers the whole card, no script needed (conversion.wrapper_links) */
+.st-card-linked { position: relative; cursor: pointer; }
+.st-card-linked > .st-card-link { position: absolute; inset: 0; z-index: 3; border-radius: inherit; }
+.st-card-linked > .st-card-link:focus-visible { outline: 2px solid var(--e-global-color-primary, #5C4033); outline-offset: 3px; }
+
+/* products overview: 導入流程 three points become cards (user, 2026-11-02: 這邊的項目也幫我卡牌化) */
+[data-id="b2831ef"] > .e-con-inner { gap: 16px !important; align-items: stretch; }
+[data-id="b2831ef"] .elementor-widget-icon-box { width: auto !important; max-width: none !important; margin: 0 !important; }
+[data-id="b2831ef"] .elementor-widget-icon-box > .elementor-widget-container {
+  height: 100%; box-sizing: border-box; padding: 40px 32px 36px !important;
+  background: var(--ac-card) !important; border-radius: var(--ac-r) !important;
+}
+[data-id="b2831ef"] .elementor-icon-box-title { margin-bottom: 12px !important; }
+@media (max-width: 767px) {
+  [data-id="b2831ef"] > .e-con-inner { gap: 12px !important; }
+  [data-id="b2831ef"] .elementor-widget-icon-box > .elementor-widget-container { padding: 30px 24px 28px !important; }
+}
+
+/* products overview: 常見產品品項 cards keep square corners, an exception to the site's rounded cards (user, 2026-11-02);
+   :not(#_) outranks the :not() chain on the site-wide card rule */
+[data-id="7853bd4"] [data-eael-wrapper-link]:not(#_),
+[data-id="7853bd4"] [data-eael-wrapper-link] *,
+[data-id="7853bd4"] [data-eael-wrapper-link]::before,
+[data-id="7853bd4"] [data-eael-wrapper-link]::after { border-radius: 0 !important; }
+
+
+/* closing CTA bands: a scene photo under a deep walnut-green veil (conversion.cta_photo sets --st-cta-photo) */
+[data-st-cta][data-st-cta] {
+  background: linear-gradient(rgba(24, 28, 22, .74), rgba(24, 28, 22, .74)), var(--st-cta-photo) center / cover no-repeat !important;
+}
+.home [data-st-cta][data-st-cta] {
+  background: linear-gradient(90deg, rgba(24, 28, 22, .88) 0%, rgba(24, 28, 22, .7) 55%, rgba(24, 28, 22, .5) 100%), var(--st-cta-photo) center / cover no-repeat !important;
+}
+[data-st-cta] > .elementor-motion-effects-container, [data-st-cta] > .elementor-background-overlay { display: none !important; }
+[data-st-cta]::before { background: none !important; opacity: 0 !important; }
+[data-st-cta] :is(h2, h3, .elementor-heading-title, p, .elementor-widget-text-editor) { color: #F3F2EE !important; }
+
+/* ---------- brand pages: 品牌故事 (gen.story_block) ---------- */
+[data-id="2afd5065"]:has(> .st-story) { padding-block: clamp(72px, 9vw, 128px) !important; }
+.st-story { display: block !important; max-width: 1240px; margin-inline: auto; padding-inline: 20px; }
+.st-story-grid { display: grid; grid-template-columns: minmax(0, 5fr) minmax(0, 6fr); gap: clamp(32px, 5vw, 80px); align-items: center; }
+.st-story-photo { margin: 0; }
+.st-story-photo img { display: block; width: 100%; aspect-ratio: 4 / 5; object-fit: cover; border-radius: var(--ac-r); }
+.st-story-photo figcaption { margin-top: 14px; font-size: 13px; letter-spacing: .06em; color: var(--e-global-color-text); opacity: .7; }
+.st-story-eyebrow { margin: 0 0 18px; font-family: Montserrat, sans-serif; font-size: 12px; font-weight: 600; letter-spacing: .2em; text-transform: uppercase; color: var(--e-global-color-accent); }
+.st-story-eyebrow span { margin-left: 12px; padding-left: 12px; border-left: 1px solid currentColor; font-family: "Noto Sans TC", sans-serif; letter-spacing: .12em; }
+.st-story-title { margin: 0 0 28px; font-family: "Noto Sans TC", sans-serif; font-size: clamp(28px, 3.2vw, 42px); font-weight: 500; line-height: 1.35; letter-spacing: .04em; color: var(--e-global-color-primary); text-wrap: balance; }
+.st-story-body p { margin: 0; font-size: 16px; line-height: 1.95; letter-spacing: .04em; color: var(--e-global-color-text); }
+.st-story-body p + p { margin-top: 1.1em; }
+.st-story-body p:first-child { font-size: 18px; color: var(--e-global-color-primary); }
+.st-story-link { display: inline-flex; align-items: center; gap: 10px; margin-top: 32px; padding-bottom: 4px; border-bottom: 1px solid currentColor;
+  font-weight: 600; letter-spacing: .06em; color: var(--e-global-color-primary); text-decoration: none; transition: gap .3s var(--ac-ease); }
+.st-story-link:hover, .st-story-link:focus-visible { gap: 16px; }
+.st-story-facts { display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 16px; margin: clamp(48px, 6vw, 72px) 0 0; padding: 0; list-style: none; }
+.st-story-fact { display: flex; flex-direction: column; gap: 10px; padding: 26px 28px; border-radius: var(--ac-r); background: var(--ac-card); }
+.st-story-fact-k { font-size: 13px; letter-spacing: .12em; color: var(--e-global-color-text); opacity: .72; }
+.st-story-fact-v { font-size: clamp(18px, 1.7vw, 22px); font-weight: 500; line-height: 1.45; letter-spacing: .04em; color: var(--e-global-color-primary); }
+@media (max-width: 900px) {
+  .st-story-grid { grid-template-columns: 1fr; }
+  .st-story-photo img { aspect-ratio: 4 / 3; }
+}
+@media (max-width: 600px) {
+  .st-story-title { font-size: 26px; text-wrap: wrap; }
+  .st-story-body p:first-child { font-size: 17px; }
+  .st-story-facts { grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 12px; }
+  .st-story-fact { padding: 18px 20px; gap: 6px; border-radius: var(--ac-r-sm); }
+  .st-story-fact-v { font-size: 17px; }
+}
+@media (prefers-reduced-motion: reduce) { .st-story-link { transition: none; } }
+
+/* ---------- courses: 從需求選主題 (courses.topics) ---------- */
+[data-id="15e21c8"] > .e-con-inner { max-width: 1320px; }
+.st-topics { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 20px; width: 100%; margin-top: clamp(24px, 3vw, 40px); }
+.st-topic { display: flex; flex-direction: column; min-height: 0 !important; overflow: hidden; border-radius: var(--ac-r); background: var(--ac-card); }
+.st-topic-pic { position: relative; margin: 0; }
+.st-topic-pic img { display: block; width: 100%; aspect-ratio: 4 / 3; object-fit: cover; }
+.st-topic-num { position: absolute; left: 20px; bottom: 16px; font-family: Montserrat, sans-serif; font-size: 13px; font-weight: 600; letter-spacing: .14em;
+  color: #fff; padding: 6px 12px; border-radius: 999px; background: rgba(24, 28, 22, .55); backdrop-filter: blur(6px); }
+.st-topic-body { display: flex; flex: 1; flex-direction: column; padding: 26px 26px 28px; }
+.st-topic-eyebrow { margin: 0 0 8px; font-family: Montserrat, sans-serif; font-size: 11px; font-weight: 600; letter-spacing: .2em; text-transform: uppercase; color: var(--e-global-color-accent); }
+.st-topic-title { margin: 0 0 14px; font-family: "Noto Sans TC", sans-serif; font-size: 22px; font-weight: 500; line-height: 1.4; letter-spacing: .06em; color: var(--e-global-color-primary); }
+.st-topic-for { margin: 0 0 14px; font-size: 14px; line-height: 1.7; letter-spacing: .03em; color: var(--e-global-color-primary); }
+.st-topic-for span { display: inline-block; margin-right: 8px; padding: 1px 8px; border: 1px solid currentColor; border-radius: 999px; font-size: 12px; opacity: .75; }
+.st-topic-desc { margin: 0 0 18px; font-size: 15px; line-height: 1.85; letter-spacing: .03em; color: var(--e-global-color-text); }
+.st-topic-list { margin: 0 0 24px; padding: 16px 0 0; border-top: 1px solid rgba(42, 29, 20, .1); list-style: none; display: grid; gap: 8px; }
+.st-topic-list li { position: relative; padding-left: 18px; font-size: 14px; line-height: 1.6; letter-spacing: .03em; color: var(--e-global-color-text); }
+.st-topic-list li::before { content: ""; position: absolute; left: 0; top: .62em; width: 6px; height: 6px; border-radius: 50%; background: var(--e-global-color-accent); }
+.st-topic-cta { display: inline-flex; align-items: center; gap: 10px; margin-top: auto; align-self: flex-start; padding-bottom: 4px; border-bottom: 1px solid currentColor;
+  font-size: 15px; font-weight: 600; letter-spacing: .06em; color: var(--e-global-color-primary); text-decoration: none; transition: gap .3s var(--ac-ease); }
+.st-topic-cta:hover, .st-topic-cta:focus-visible { gap: 16px; }
+@media (max-width: 1100px) { .st-topics { grid-template-columns: repeat(2, minmax(0, 1fr)); } }
+@media (max-width: 600px) {
+  .st-topics { grid-template-columns: 1fr; grid-auto-rows: auto !important; align-items: start; gap: 16px; }
+  .st-topic { border-radius: var(--ac-r-sm); }
+  .st-topic-pic img { aspect-ratio: 16 / 9; }
+  .st-topic-body { padding: 22px 20px 24px; }
+}
+@media (prefers-reduced-motion: reduce) { .st-topic-cta { transition: none; } }
+
+/* ---------- courses: 把內容帶回現場 banner (courses.field) ---------- */
+[data-id="6f10415"] { padding: 0 !important; }
+.st-field { position: relative; width: 100%; display: flex; align-items: center; justify-content: center; min-height: clamp(460px, 52vw, 640px);
+  padding: clamp(64px, 8vw, 112px) 20px; text-align: center;
+  background: linear-gradient(rgba(24, 28, 22, .62), rgba(24, 28, 22, .72)), var(--st-field-photo) center 40% / cover no-repeat; }
+.st-field-inner { max-width: 760px; }
+.st-field-eyebrow { margin: 0 0 16px; font-family: Montserrat, sans-serif; font-size: 12px; font-weight: 600; letter-spacing: .22em; text-transform: uppercase; color: #cfe3a8; }
+.st-field-title { margin: 0 0 24px; font-family: "Noto Sans TC", sans-serif; font-size: clamp(28px, 3.4vw, 44px); font-weight: 500; line-height: 1.35; letter-spacing: .06em; color: #F3F2EE; text-wrap: balance; }
+.st-field-text { margin: 0 auto; max-width: 680px; font-size: 17px; line-height: 1.95; letter-spacing: .04em; color: rgba(243, 242, 238, .9); }
+.st-field-text + .st-field-text { margin-top: .6em; font-size: 15px; color: rgba(243, 242, 238, .75); }
+.st-field-btn { margin-top: 36px; }
+@media (max-width: 600px) { .st-field-text { font-size: 16px; } }
+
+/* ---------- support: 維修年費方案 / 牙科設備保固說明 (content_fixes.support) ---------- */
+.st-plan, .st-warranty { width: 100%; max-width: 1240px; margin: 0 auto; }
+.st-plan-grid { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 20px; }
+.st-plan-card, .st-warranty-card { position: relative; padding: 34px 32px 36px; border-radius: var(--ac-r); background: var(--ac-card); }
+.st-plan-num { position: absolute; right: 28px; top: 26px; font-family: Montserrat, sans-serif; font-size: 40px; font-weight: 300; line-height: 1; color: var(--e-global-color-primary); opacity: .14; }
+.st-plan-eyebrow { margin: 0 0 10px; font-family: Montserrat, sans-serif; font-size: 11px; font-weight: 600; letter-spacing: .2em; text-transform: uppercase; color: var(--e-global-color-accent); }
+:is(.st-plan-card, .st-warranty-card) h3 { margin: 0 0 14px; font-family: "Noto Sans TC", sans-serif; font-size: 22px; font-weight: 500; letter-spacing: .06em; color: var(--e-global-color-primary); }
+.st-plan-card p:last-child { margin: 0; font-size: 15px; line-height: 1.85; letter-spacing: .03em; color: var(--e-global-color-text); }
+.st-plan-btn { display: table !important; margin: clamp(32px, 4vw, 44px) auto 0; }
+.st-warranty-grid { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 20px; }
+.st-warranty-card ul { margin: 6px 0 0; padding: 0; list-style: none; display: grid; gap: 14px; }
+.st-warranty-card li { position: relative; padding-left: 30px; font-size: 16px; line-height: 1.75; letter-spacing: .03em; color: var(--e-global-color-text); }
+.st-warranty-card li::before { position: absolute; left: 0; top: .2em; display: grid; place-items: center; width: 20px; height: 20px; border-radius: 50%; font-size: 12px; font-weight: 700; }
+.st-warranty-card.is-in li::before { content: "✓"; color: #fff; background: var(--e-global-color-accent); }
+.st-warranty-card.is-out li::before { content: "–"; color: var(--e-global-color-text); background: rgba(42, 29, 20, .1); }
+.st-warranty-note { display: flex; align-items: center; justify-content: space-between; gap: 16px 32px; flex-wrap: wrap; margin-top: 20px; padding: 24px 32px;
+  border-radius: var(--ac-r); border: 1px solid rgba(42, 29, 20, .12); }
+.st-warranty-note p { margin: 0; font-size: 16px; line-height: 1.7; letter-spacing: .04em; color: var(--e-global-color-primary); }
+.st-warranty-note .st-topic-cta { margin-top: 0; }
+@media (max-width: 900px) { .st-plan-grid, .st-warranty-grid { grid-template-columns: 1fr; grid-auto-rows: auto !important; align-items: start; gap: 14px; } :is(.st-plan-card, .st-warranty-card) { min-height: 0 !important; } }
+@media (max-width: 600px) {
+  :is(.st-plan-card, .st-warranty-card) { padding: 26px 22px 28px; border-radius: var(--ac-r-sm); }
+  .st-warranty-note { padding: 20px 22px; border-radius: var(--ac-r-sm); }
+}
+.st-plan-btn.elementor-button, .st-field-btn.elementor-button { background: var(--st-green, #62B320) !important; color: var(--st-black, #12100F) !important;
+  border-radius: 999px !important; padding: 13px 30px; font-size: 15px; font-weight: 500; letter-spacing: .06em; }
+.st-plan-btn.elementor-button:hover, .st-field-btn.elementor-button:hover { filter: brightness(1.08); }
+.st-plan-btn.elementor-button { display: flex !important; width: max-content; }
+
+/* home closing CTA: centred like every other page's CTA band (was text left, button right) */
+.home [data-st-cta][data-st-cta] {
+  background: linear-gradient(rgba(24, 28, 22, .74), rgba(24, 28, 22, .74)), var(--st-cta-photo) center / cover no-repeat !important;
+}
+.home [data-id="d7f5552"], .home [data-id="d7f5552"] > .e-con-inner { flex-direction: column !important; align-items: center !important; justify-content: center !important; gap: 32px !important; }
+.home [data-id="97bdf19"] { width: 100% !important; max-width: 760px; display: grid !important; grid-template-columns: 1fr !important; justify-items: center !important; text-align: center; }
+.home [data-id="97bdf19"] > * { grid-column: 1 !important; grid-row: auto !important; }
+.home [data-id="97bdf19"] :is(.elementor-heading-title, .elementor-widget-text-editor, p) { text-align: center !important; }
+.home [data-id="47fa55a"] { width: auto !important; align-self: center !important; justify-self: center !important; }
+
+/* ---------- home: 涵蓋完整牙科數位製程 cards, reworked (user, 2026-11-02: 設計要再優化) ----------
+   the column flex squeezed the photo to a ~2.4:1 strip, the 2rem number sat flush under it,
+   and margin-top:auto opened a dead gap above the link. */
+.home [data-id="676bbaf"] { gap: 20px !important; align-items: stretch !important; }
+.home [data-id="676bbaf"] .elementor-widget-container { padding: 16px 16px 28px !important; }
+.home [data-id="676bbaf"] .elementor-icon-box-wrapper { display: flex !important; flex-direction: column !important; height: 100%; }
+.home [data-id="bd50012"] .st-step-pic { flex: none; aspect-ratio: 4 / 3; margin: 0 0 26px !important; border-radius: calc(var(--ac-r) - 10px); background: #1d1712; }
+.home [data-id="676bbaf"] .elementor-icon-box-content { flex: 1 1 auto; height: auto !important; padding: 0 12px; display: flex !important; flex-direction: column !important; align-items: flex-start !important; }
+.home [data-id="676bbaf"] .elementor-icon-box-content::before {
+  content: "STEP " counter(step, decimal-leading-zero) !important; margin: 0 0 12px !important;
+  font: 600 12px/1 Montserrat, sans-serif !important; letter-spacing: .2em !important; color: var(--v-band-num, #B2E901) !important;
+}
+.home [data-id="676bbaf"] .elementor-icon-box-description { margin: 0 !important; font-size: 22px !important; font-weight: 500 !important; line-height: 1.4 !important; letter-spacing: .08em !important; color: #F3F2EE !important; }
+.home [data-id="676bbaf"] .st-step-text { margin: 14px 0 0 !important; padding: 0 !important; font-size: 15px !important; line-height: 1.85 !important; letter-spacing: .03em; color: rgba(243, 242, 238, .74) !important; }
+.home [data-id="676bbaf"] .st-step-link { margin-top: auto !important; padding-top: 0; transform: translateY(0); }
+.home [data-id="676bbaf"] .st-step-text { margin-bottom: 24px !important; }
+@media (max-width: 1100px) { .home [data-id="bd50012"] .st-step-pic { aspect-ratio: 16 / 10; } }
+@media (max-width: 560px) { .home [data-id="676bbaf"] .elementor-icon-box-description { font-size: 20px !important; } }
+.home [data-id="676bbaf"] .elementor-icon-box-content { width: 100%; min-width: 0; box-sizing: border-box; }
+.home [data-id="676bbaf"] .st-step-text { max-width: 100%; overflow-wrap: anywhere; }
+@media (max-width: 560px) {
+  .home [data-id="676bbaf"] { grid-auto-rows: auto !important; align-items: start !important; }
+  .home [data-id="676bbaf"] > .elementor-widget, .home [data-id="676bbaf"] .elementor-widget-container { min-height: 0 !important; height: auto !important; }
+}
+
+/* 關於崧達「我們提供什麼」: 教育與進修 card (content_fixes.about_offer) gets a classroom photo of its own */
+[data-id="st0edu1"]:not(.elementor-motion-effects-element-type-background) {
+  background-image: url("/wp-content/uploads/2026/news/20260602-113-2.webp") !important; background-position: center 35% !important; background-size: cover !important;
+}
+
+/* 關於崧達 hero (3475.jpg, a technician holding a denture top-right): on narrow screens keep the denture in frame */
+@media (max-width: 767px) {
+  .elementor-498 [data-id="b5fb0b2"]:not(.elementor-motion-effects-element-type-background),
+  .elementor-498 [data-id="b5fb0b2"] > .elementor-motion-effects-container > .elementor-motion-effects-layer { background-position: 78% center !important; }
+}
+
+/* 關於崧達 代理品牌: ten logo tiles (content_fixes.about_page) replace the four-slide carousel */
+[data-id="a9e2670"] .st-about-brands { display: grid; grid-template-columns: repeat(5, minmax(0, 1fr)); gap: 16px; width: 100%; max-width: 1240px; margin: clamp(28px, 3vw, 44px) auto 0; }
+.st-about-brand { display: flex; flex-direction: column; align-items: center; gap: 14px; padding: 30px 20px 24px; border-radius: var(--ac-r); background: var(--ac-card); text-decoration: none; }
+.st-about-brand-logo { display: grid; place-items: center; height: 48px; width: 100%; }
+.st-about-brand-logo img { max-width: 78%; max-height: 40px; width: auto; height: auto; object-fit: contain; filter: brightness(0); opacity: .78; transition: opacity .3s var(--ac-ease); }
+.st-about-brand:is(:hover, :focus-visible) .st-about-brand-logo img { opacity: 1; }
+.st-about-brand-cat { font-size: 13px; letter-spacing: .06em; color: var(--e-global-color-text); text-align: center; }
+@media (max-width: 1024px) { [data-id="a9e2670"] .st-about-brands { grid-template-columns: repeat(3, minmax(0, 1fr)); } }
+@media (max-width: 600px) { [data-id="a9e2670"] .st-about-brands { grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 12px; } .st-about-brand { padding: 22px 12px 18px; border-radius: var(--ac-r-sm); } }
+.st-wf-cta.elementor-button { background: var(--st-green, #62B320) !important; color: var(--st-black, #12100F) !important; border-radius: 999px !important; padding: 13px 28px; font-weight: 500; letter-spacing: .06em; }
+.st-wf-cta.elementor-button:hover { filter: brightness(1.08); }
+
+/* 技術文件下載: request cards (content_fixes.downloads) */
+.st-docs-grid { grid-template-columns: repeat(4, minmax(0, 1fr)) !important; }
+.st-doc-card { display: flex; flex-direction: column; }
+.st-doc-card p:not(.st-plan-eyebrow) { margin: 0 0 22px; font-size: 15px; line-height: 1.85; color: var(--e-global-color-text); }
+.st-doc-card .st-topic-cta { margin-top: auto; }
+@media (max-width: 1100px) { .st-docs-grid { grid-template-columns: repeat(2, minmax(0, 1fr)) !important; } }
+@media (max-width: 600px) { .st-docs-grid { grid-template-columns: 1fr !important; } }
+
+/* ---------- courses: 牙科專業課程 open course card (courses.open_card) ---------- */
+.st-ev-list { display: grid !important; gap: 24px; width: 100%; max-width: 1180px; margin: 8px auto 0; }
+.st-ev { display: grid; grid-template-columns: minmax(0, 5fr) minmax(0, 7fr); overflow: hidden; border-radius: var(--ac-r); background: var(--ac-card); }
+.st-ev-pic { position: relative; background: #0f2a4a; }
+.st-ev-poster { display: block; height: 100%; }
+.st-ev-poster img { display: block; width: 100%; height: 100%; min-height: 100%; object-fit: cover; object-position: top center; aspect-ratio: 843 / 1192; transition: transform .6s var(--ac-ease); }
+@media (hover: hover) { .st-ev-poster:hover img { transform: scale(1.02); } }
+.st-ev-body { display: flex; flex-direction: column; padding: clamp(32px, 4vw, 56px); }
+.st-ev-tags { display: flex; flex-wrap: wrap; gap: 8px; margin: 0 0 18px; }
+.st-ev-tags span { padding: 5px 12px; border-radius: 999px; font-size: 12px; letter-spacing: .08em; }
+.st-ev-kind { color: var(--e-global-color-primary); background: rgba(51, 74, 51, .08); }
+.st-ev-status { color: #2f5d12; background: rgba(98, 179, 32, .16); font-weight: 600; }
+.st-ev-title { margin: 0 0 18px; font-family: "Noto Sans TC", sans-serif; font-size: clamp(24px, 2.4vw, 32px); font-weight: 500; line-height: 1.4; letter-spacing: .06em; color: var(--e-global-color-primary); }
+.st-ev-intro { margin: 0 0 28px; font-size: 15px; line-height: 1.95; letter-spacing: .03em; color: var(--e-global-color-text); }
+.st-ev-facts { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 0 28px; margin: 0 0 32px; padding: 0; border-top: 1px solid rgba(42, 29, 20, .1); }
+.st-ev-facts > div { display: grid; grid-template-columns: 5.5em 1fr; gap: 12px; padding: 14px 0; border-bottom: 1px solid rgba(42, 29, 20, .1); }
+.st-ev-facts dt { font-size: 13px; letter-spacing: .1em; color: var(--e-global-color-text); opacity: .7; }
+.st-ev-facts dd { margin: 0; font-size: 15px; line-height: 1.6; color: var(--e-global-color-primary); }
+.st-ev-actions { display: flex; flex-wrap: wrap; align-items: center; gap: 14px 24px; margin-top: auto; }
+.st-ev-btn.elementor-button { background: var(--st-green, #62B320) !important; color: var(--st-black, #12100F) !important; border-radius: 999px !important; padding: 14px 32px; font-size: 16px; font-weight: 500; letter-spacing: .08em; }
+.st-ev-btn.elementor-button:hover { filter: brightness(1.08); }
+.st-ev-more { padding-bottom: 3px; border-bottom: 1px solid currentColor; font-size: 15px; font-weight: 600; letter-spacing: .06em; color: var(--e-global-color-primary); text-decoration: none; }
+@media (max-width: 960px) { .st-ev { grid-template-columns: 1fr; } .st-ev-poster img { aspect-ratio: 4 / 3; } }
+@media (max-width: 600px) { .st-ev { border-radius: var(--ac-r-sm); } .st-ev-facts { grid-template-columns: 1fr; } .st-ev-body { padding: 26px 22px 30px; } }
+@media (prefers-reduced-motion: reduce) { .st-ev-poster img { transition: none; } }
+
+/* 技術支援 維修年費方案: a machine-interior photo behind the plan (user, 2026-11-02: 背景補一張底圖) */
+[data-id="c991798"] {
+  border-radius: var(--ac-r) !important; overflow: hidden;
+  padding: clamp(56px, 7vw, 96px) clamp(20px, 4vw, 56px) !important;
+  background: linear-gradient(180deg, rgba(24, 28, 22, .78) 0%, rgba(24, 28, 22, .86) 100%),
+              url("/wp-content/uploads/brands/zirkonzahn/m4-nov16-2086-print-4a4817.webp") center 40% / cover no-repeat #1E2219 !important;
+}
+[data-id="c991798"] [data-id="1cdc91e"] .elementor-heading-title { color: #FEFAE0 !important; }
+[data-id="c991798"] [data-id="602cb1b"], [data-id="c991798"] [data-id="602cb1b"] :is(p, .elementor-widget-container) { color: rgba(243, 242, 238, .85) !important; }
+[data-id="c991798"] .st-plan-card { background: rgba(255, 255, 255, .96); }
+@media (max-width: 600px) { [data-id="c991798"] { border-radius: var(--ac-r-sm) !important; } }
+/* 關於崧達 hero: the denture sits top-right in the photo and was cut by the top edge (user, 2026-11-02: 牙齒置中一點).
+   Zoomed and anchored top-right on wider screens so the denture shows whole, nearer the middle, clear of the title. */
+@media (min-width: 768px) {
+  .elementor-498 [data-id="b5fb0b2"]:not(.elementor-motion-effects-element-type-background),
+  .elementor-498 [data-id="b5fb0b2"] > .elementor-motion-effects-container > .elementor-motion-effects-layer { background-size: 130% auto !important; background-position: 100% 0% !important; }
+}
+
+/* courses: 牙科專業課程 intro lines centred under the heading (user, 2026-11-02) */
+[data-id="57de0cd"], [data-id="57de0cd"] :is(.elementor-widget-container, p) { text-align: center !important; }
+[data-id="57de0cd"] p + p { margin-top: .4em; }
+/* course card poster: the card rounds the corners; the image itself stays square so no gap shows beside the white panel.
+   The focus ring after closing the lightbox sat on the seam as a dotted line: keyboard focus only, drawn inside. */
+.st-ev-poster img { border-radius: 0 !important; }
+.st-ev-poster:focus { outline: none; }
+.st-ev-poster:focus-visible { outline: 2px solid var(--st-green, #62B320); outline-offset: -4px; }
+/* 已舉辦場次 cards: date / place / speakers as labelled rows (courses.past_card) */
+.st-past-facts { display: grid; gap: 8px; margin: 4px 0 18px; padding: 0; }
+.st-past-facts > div { display: grid; grid-template-columns: 3em 1fr; gap: 10px; align-items: baseline; }
+.st-past-facts dt { font-size: 12px; letter-spacing: .1em; color: var(--e-global-color-text); opacity: .6; }
+.st-past-facts dd { margin: 0; font-size: 14px; line-height: 1.6; color: var(--e-global-color-primary); }
+
+/* 崧達的價值 key points (user, 2026-11-02: 圖沒有在正中間，放大一點).
+   Elementor gives the first list item a smaller top padding, so its icon sat 6px higher; the line icon also sat
+   left of the circle's centre. Same padding on every card, icon centred in a larger circle. */
+.st-points ul.elementor-icon-list-items > li.elementor-icon-list-item,
+.st-points ul.elementor-icon-list-items > li.elementor-icon-list-item:first-child,
+.st-points ul.elementor-icon-list-items > li.elementor-icon-list-item:last-child { padding: 34px 18px 30px !important; gap: 18px; }
+.st-points .elementor-icon-list-icon { position: relative; width: 76px !important; height: 76px !important; }
+.st-points .elementor-icon-list-icon .st-pt-icon { position: absolute; top: 50%; left: 50%; width: 34px !important; height: 34px !important; margin: 0 !important; transform: translate(-50%, -50%); }
+.st-points .elementor-icon-list-text { font-size: 16px; }
+@media (max-width: 640px) {
+  .st-points ul.elementor-icon-list-items > li.elementor-icon-list-item,
+  .st-points ul.elementor-icon-list-items > li.elementor-icon-list-item:first-child,
+  .st-points ul.elementor-icon-list-items > li.elementor-icon-list-item:last-child { padding: 18px 22px !important; }
+  .st-points .elementor-icon-list-icon { width: 58px !important; height: 58px !important; }
+  .st-points .elementor-icon-list-icon .st-pt-icon { width: 28px !important; height: 28px !important; }
+}
+/* 關於崧達 代理品牌: twelve brands, six to a row */
+[data-id="a9e2670"] .st-about-brands { grid-template-columns: repeat(6, minmax(0, 1fr)); }
+@media (min-width: 1200px) { [data-id="a9e2670"] .st-about-brands { grid-template-columns: repeat(7, minmax(0, 1fr)); } }   /* fourteen brands: two even rows (2026-11-03) */
+@media (max-width: 1024px) { [data-id="a9e2670"] .st-about-brands { grid-template-columns: repeat(4, minmax(0, 1fr)); } }
+@media (max-width: 600px) { [data-id="a9e2670"] .st-about-brands { grid-template-columns: repeat(2, minmax(0, 1fr)); } }
+
+/* 說明中心 / 常見問題 stock photos, scoped to those pages (generated by _build/tools/page_photos.py --css; user 2026-11-02) */
+.elementor-555 [data-id="b5fb0b2"]:not(.elementor-motion-effects-element-type-background), .elementor-555 [data-id="b5fb0b2"] > .elementor-motion-effects-container > .elementor-motion-effects-layer { background-image: url("/wp-content/uploads/2026/pages/photo-1600170311833-c2cf5280ce49.webp") !important; background-size: cover !important; background-position: center !important; }
+.elementor-555 [data-id="87c82b2"]:not(.elementor-motion-effects-element-type-background), .elementor-555 [data-id="87c82b2"] > .elementor-motion-effects-container > .elementor-motion-effects-layer { background-image: url("/wp-content/uploads/2026/pages/photo-1772566022519-e04921619df2.webp") !important; background-size: cover !important; background-position: center !important; }
+.elementor-555 [data-id="c95bf9d"]:not(.elementor-motion-effects-element-type-background), .elementor-555 [data-id="c95bf9d"] > .elementor-motion-effects-container > .elementor-motion-effects-layer { background-image: url("/wp-content/uploads/2026/pages/photo-1555085575-47bd89db1be4.webp") !important; background-size: cover !important; background-position: center !important; }
+.elementor-555 [data-id="30e47e5"]:not(.elementor-motion-effects-element-type-background), .elementor-555 [data-id="30e47e5"] > .elementor-motion-effects-container > .elementor-motion-effects-layer { background-image: url("/wp-content/uploads/2026/pages/photo-1777443726993-8f9c8e96e46e.webp") !important; background-size: cover !important; background-position: center !important; }
+.elementor-555 [data-id="0d8ebee"]:not(.elementor-motion-effects-element-type-background), .elementor-555 [data-id="0d8ebee"] > .elementor-motion-effects-container > .elementor-motion-effects-layer { background-image: url("/wp-content/uploads/2026/pages/photo-1593022356769-11f762e25ed9.webp") !important; background-size: cover !important; background-position: center !important; }
+.elementor-555 [data-id="4d090e1"]:not(.elementor-motion-effects-element-type-background), .elementor-555 [data-id="4d090e1"] > .elementor-motion-effects-container > .elementor-motion-effects-layer { background-image: url("/wp-content/uploads/2026/pages/photo-1675516030465-e2ad117e870f.webp") !important; background-size: cover !important; background-position: center !important; }
+.elementor-555 [data-id="1cc7ccb"]:not(.elementor-motion-effects-element-type-background), .elementor-555 [data-id="1cc7ccb"] > .elementor-motion-effects-container > .elementor-motion-effects-layer { background-image: url("/wp-content/uploads/2026/pages/photo-1562330743-fbc6ef07ca78.webp") !important; background-size: cover !important; background-position: center !important; }
+.elementor-555 [data-id="94f7813"]:not(.elementor-motion-effects-element-type-background), .elementor-555 [data-id="94f7813"] > .elementor-motion-effects-container > .elementor-motion-effects-layer { background-image: url("/wp-content/uploads/2026/pages/photo-1590424693420-634a0b0b782c.webp") !important; background-size: cover !important; background-position: center !important; }
+.elementor-560 [data-id="b5fb0b2"]:not(.elementor-motion-effects-element-type-background), .elementor-560 [data-id="b5fb0b2"] > .elementor-motion-effects-container > .elementor-motion-effects-layer { background-image: url("/wp-content/uploads/2026/pages/photo-1674775372058-c4c8813c6611.webp") !important; background-size: cover !important; background-position: center !important; }
+.elementor-560 [data-id="4c85e4a"]:not(.elementor-motion-effects-element-type-background), .elementor-560 [data-id="4c85e4a"] > .elementor-motion-effects-container > .elementor-motion-effects-layer { background-image: url("/wp-content/uploads/2026/pages/photo-1663182107973-abb58c2c13e7.webp") !important; background-size: cover !important; background-position: center !important; }
+.elementor-560 [data-id="b5fb0b2"]:not(.elementor-motion-effects-element-type-background), .elementor-560 [data-id="b5fb0b2"] > .elementor-motion-effects-container > .elementor-motion-effects-layer { background-position: center 12% !important; }   /* keep the technician's face in frame */
+/* Yamahachi lockup is long and light: allow it nearly the full tile width so it reads at the same weight as the others */
+img[src$="/yamahachi.png"] { max-width: 94% !important; max-height: none !important; }
+.st-pd-brand img[src$="/yamahachi.png"] { height: 30px !important; width: auto !important; }
+.st-param-cta { margin-top: 6px; align-self: flex-start; }
+
+/* 客戶案例 案例整理中: three ways in while the case articles are being written (content_fixes.cases) */
+.st-cases-soon { width: 100%; max-width: 1180px; margin: 0 auto; }
+.st-cases-soon .st-docs-grid { grid-template-columns: repeat(3, minmax(0, 1fr)) !important; }
+@media (max-width: 900px) { .st-cases-soon .st-docs-grid { grid-template-columns: 1fr !important; } }
+
+/* 牙科產品 mosaic: category names stay visible (the template showed them on hover only) once the tiles carry the new catalogue (2026-11-03) */
+[data-id="7853bd4"] .block_item_hover .elementor-widget-container { opacity: 1 !important; transform: none !important; }
+
+/* product categories: each brand section opens with the brand's logo instead of its name (gen.build_category_page, 2026-11-03).
+   One optical size: wide word marks are capped by width, compact marks by height. */
+.st-cat-brand { display: inline-flex; align-items: center; justify-content: center; height: 64px; }
+.st-cat-brand img { display: block; width: auto; height: 46px; max-width: min(300px, 70vw); object-fit: contain; }
+.st-cat-brand img:is([data-brand="ko-max"], [data-brand="dentbird"]) { height: 64px; }
+.st-cat-brand img:is([data-brand="yamahachi"], [data-brand="zirkonzahn"], [data-brand="cadstar"], [data-brand="borea"], [data-brand="sundental"], [data-brand="medifive"], [data-brand="bsm"]) { height: auto; width: min(260px, 64vw); max-height: 50px; }
+.st-cat-brand img[data-brand="medifive"] { width: min(210px, 52vw); }
+.st-cat-brand img[data-brand="yamahachi"] { width: min(320px, 72vw); max-height: none; }
+@media (max-width: 767px) {
+  .st-cat-brand { height: 52px; } .st-cat-brand img { height: 36px; }
+  .st-cat-brand img:is([data-brand="zirkonzahn"], [data-brand="cadstar"], [data-brand="borea"], [data-brand="sundental"], [data-brand="bsm"]) { width: 52vw; }
+  .st-cat-brand img[data-brand="medifive"] { width: 44vw; }
+}
+
+/* course kind (培訓 etc.) as a tag, like the open-course card's tags (user, 2026-11-03: 培訓的字樣希望是標籤形式呈現) */
+.st-course-kind { display: inline-block; align-self: flex-start; width: fit-content; margin-bottom: 14px; padding: 5px 12px; border-radius: 999px;
+  font-size: 12px; line-height: 1.4; letter-spacing: .08em; color: var(--e-global-color-primary, #334A33); background: rgba(51, 74, 51, .08); }
+
+/* Whip Mix: an oval mark with a lot of air around the word, so it reads small at the shared logo height (2026-11-03) */
+/* matches the dark logo and its hover colour copy (logos/color/whipmix.png) alike, so both show at one size */
+.st-brand-tile img[src$="/whipmix.png"], .st-about-brand-logo img[src$="/whipmix.png"] { max-height: 58px !important; max-width: 70% !important; }
+.st-cat-brand img[data-brand="whipmix"] { height: 64px; }
+.st-pd-brand img[src$="/whipmix.png"] { height: 44px !important; width: auto !important; }

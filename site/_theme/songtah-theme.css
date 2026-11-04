@@ -1,0 +1,304 @@
+/* Songtah brand theme — loaded after Elementor/Astra on every page.
+   Colors come from the Elementor global tokens (see _build/tools/theme.py);
+   this file only covers what the tokens cannot reach. */
+
+:root {
+  --st-chitose: #334A33;
+  --st-songtah: #62B320;
+  --st-lime: #B2E901;
+  --st-cornsilk: #FEFAE0;
+  --st-paper: #F6F5F2;      /* page background: warm gray-white (V4 「精工」) */
+  --st-black: #12100F;
+  --st-forest-900: #172018;
+  --st-forest-700: #283A29;
+  --st-walnut: #2A1D14;     /* dark surfaces: warm walnut to match the wood-toned photos */
+}
+
+html, body, .site, .site-content, .ast-separate-container, .ast-page-builder-template .site-content {
+  background-color: var(--st-paper) !important;
+}
+
+body {
+  -webkit-font-smoothing: antialiased;
+  text-rendering: optimizeLegibility;
+}
+
+::selection { background: var(--st-songtah); color: var(--st-black); }
+
+:focus-visible { outline: 2px solid var(--st-chitose); outline-offset: 3px; }
+
+/* Elementor buttons default to white text; on 崧達綠 that is 2.6:1. Black is 7.2:1.
+   Buttons that set their own color keep it (their selectors are more specific). */
+.elementor-button,
+.elementor-button:visited { color: var(--st-black); }
+.elementor-button .elementor-button-icon svg { fill: currentColor; }
+.wpcf7-submit, .elementor-field-type-submit button, input[type="submit"] { color: var(--st-black) !important; border-radius: 2px; }
+.wpcf7-submit:hover, input[type="submit"]:hover { background-color: var(--st-lime) !important; }
+.elementor-button { transition: background-color .45s cubic-bezier(.16, 1, .3, 1), color .45s cubic-bezier(.16, 1, .3, 1), border-color .45s cubic-bezier(.16, 1, .3, 1); }
+
+/* quieter, wider headings for large display sizes come from theme.py;
+   here only the balance of line breaks */
+.elementor-heading-title { text-wrap: balance; word-break: keep-all; overflow-wrap: anywhere; }
+
+/* page heroes (b5fb0b2 shared, 3da28cb5 brand pages, aacd4bd product pages): warm walnut gradient behind the copy only, photo stays bright */
+.elementor .elementor-element.elementor-element-b5fb0b2::before,
+.elementor .elementor-element.elementor-element-3da28cb5::before,
+.elementor .elementor-element.elementor-element-aacd4bd::before {
+  --background-overlay: '' !important;
+  content: '' !important;
+  background-color: transparent !important;
+  background-image: linear-gradient(180deg, rgba(42, 29, 20, .5) 0%, rgba(42, 29, 20, 0) 24%), linear-gradient(90deg, rgba(42, 29, 20, .74) 0%, rgba(42, 29, 20, .5) 36%, rgba(42, 29, 20, .06) 72%, rgba(42, 29, 20, 0) 100%) !important;
+  opacity: 1 !important;
+}
+.elementor .elementor-element.elementor-element-b5fb0b2 > .elementor-element,
+.elementor .elementor-element.elementor-element-b5fb0b2 > .e-con-inner,
+.elementor .elementor-element.elementor-element-3da28cb5 > .e-con-inner,
+.elementor .elementor-element.elementor-element-aacd4bd > .e-con-inner { position: relative; z-index: 1; }
+@media (max-width: 767px) {
+  .elementor .elementor-element.elementor-element-b5fb0b2::before,
+  .elementor .elementor-element.elementor-element-3da28cb5::before,
+  .elementor .elementor-element.elementor-element-aacd4bd::before {
+    background-image: linear-gradient(0deg, rgba(42, 29, 20, .82) 0%, rgba(42, 29, 20, .6) 55%, rgba(42, 29, 20, .2) 100%) !important;
+  }
+}
+
+/* brand page hero (6cb3520b, photo set per brand by gen.py): on phones the copy spans the whole photo, so shade all of it */
+@media (max-width: 767px) {
+  .elementor-2710 .elementor-element.elementor-element-6cb3520b { position: relative; }
+  .elementor-2710 .elementor-element.elementor-element-6cb3520b::after { content: ''; position: absolute; inset: 0; background: rgba(42, 29, 20, .58); pointer-events: none; }
+  .elementor-2710 .elementor-element.elementor-element-6cb3520b > * { position: relative; z-index: 1; }
+}
+
+/* no entrance animations: Elementor hides animated elements (.elementor-invisible)
+   until they scroll into view, then plays fadeIn / fadeInLeft / … — show them as-is */
+.elementor-invisible { visibility: visible !important; }
+/* …except the sticky header's placeholder copy: the rule above made it visible (but transparent) on top of the real
+   header, so it swallowed the hover and the 牙科產品 / 服務項目 dropdowns never opened */
+.elementor-sticky__spacer { visibility: hidden !important; pointer-events: none !important; }
+.elementor-element.animated,
+.elementor-element.animated-slow,
+.elementor-element.animated-fast { animation: none !important; }
+
+/* ---------- site-wide polish (from the home demo) ---------- */
+:root { --st-hl: rgba(51, 74, 51, .16); --st-hl-dark: rgba(243, 242, 238, .18); --st-ease: cubic-bezier(.16, 1, .3, 1); }
+
+/* English eyebrow pills above headings */
+.title_small { display: none !important; }
+
+/* icon circles are outlines now (colors from theme.py): thin line, no fill */
+.elementor-view-framed .elementor-icon { border-width: 1px !important; }
+.elementor-view-stacked .elementor-icon { border: 1px solid currentColor; }
+
+/* buttons turned into text links (class added by site_polish.py) */
+.st-link .elementor-button {
+  background: none !important; padding: 0 0 6px !important; border-radius: 0 !important;
+  color: var(--st-chitose) !important; font-size: 15px; letter-spacing: .14em;
+  background-image: linear-gradient(currentColor, currentColor) !important;
+  background-size: 100% 1px !important; background-position: 0 100% !important; background-repeat: no-repeat !important;
+  transition: background-size .6s var(--st-ease), color .4s var(--st-ease);
+}
+.st-link .elementor-button:hover { background-size: 40% 1px !important; color: var(--st-black) !important; }
+.st-link .elementor-button-icon { display: none; }
+
+/* sticky header: frosted paper */
+.sticky-header-white.elementor-sticky--active {
+  background-color: rgba(246, 245, 242, .86) !important;
+  -webkit-backdrop-filter: blur(14px); backdrop-filter: blur(14px);
+  box-shadow: 0 1px 0 var(--st-hl) !important;
+}
+
+/* footer: Songtah deep green (user, 2026-11-02), was walnut */
+[data-elementor-type="footer"] [data-id="8072831"] { background-color: var(--st-chitose) !important; }
+[data-elementor-type="footer"] .elementor-icon-list-text,
+[data-elementor-type="footer"] .elementor-widget-text-editor { color: rgba(243, 242, 238, .72) !important; }
+[data-elementor-type="footer"] .elementor-heading-title { color: var(--st-paper) !important; font-weight: 400 !important; letter-spacing: .14em !important; }
+[data-elementor-type="footer"] a:hover .elementor-icon-list-text { color: var(--st-lime) !important; }
+[data-elementor-type="footer"] [data-id="9f22fa1"] { border-top: 1px solid var(--st-hl-dark); background-color: #283B28 !important; }
+
+/* brand index: quiet logo wall with hairline frames */
+.elementor-2656 [data-id="caff39e"] .e-con[data-eael-wrapper-link] {
+  background: transparent !important; border: 1px solid var(--st-hl) !important; border-radius: 0 !important;
+  transition: border-color .5s var(--st-ease), background-color .5s var(--st-ease);
+}
+.elementor-2656 [data-id="caff39e"] .e-con[data-eael-wrapper-link]:hover { border-color: var(--st-chitose) !important; background: rgba(255, 255, 255, .45) !important; }
+
+/* key points: presentation-style icon tiles */
+.st-points { width: 100% !important; max-width: 100% !important; align-self: stretch !important; }
+.st-points .elementor-widget-container { width: 100%; }
+.st-points ul.elementor-icon-list-items { display: grid !important; grid-template-columns: repeat(auto-fit, minmax(0, 1fr)); margin: 8px 0 !important; border-block: 1px solid var(--st-hl); }
+.st-points .elementor-icon-list-item {
+  display: flex !important; flex-direction: column; align-items: center; justify-content: flex-start; gap: 14px;
+  margin: 0 !important; padding: 26px 14px 24px !important; text-align: center;
+}
+.st-points .elementor-icon-list-item + .elementor-icon-list-item { border-left: 1px solid var(--st-hl); }
+.st-points .elementor-icon-list-icon {
+  width: 56px; height: 56px; flex: none; margin: 0 !important; padding: 0 !important;
+  display: grid !important; place-items: center; border: 1px solid rgba(51, 74, 51, .28); border-radius: 50%;
+  color: var(--st-chitose);
+}
+.st-points .st-pt-icon { width: 24px !important; height: 24px !important; fill: none !important; stroke: currentColor !important; }
+.st-points .st-pt-icon * { fill: none !important; }
+.st-points .elementor-icon-list-text { padding: 0 !important; font-size: 14px; line-height: 1.6; letter-spacing: .06em; color: var(--st-black); }
+.postid-2096 [data-id="5a11007"] { gap: 32px !important; align-items: center !important; margin-top: 12px; }
+
+@media (max-width: 640px) {
+  .st-points ul.elementor-icon-list-items { grid-template-columns: 1fr; }
+  .st-points .elementor-icon-list-item { flex-direction: row; text-align: left; gap: 18px; padding: 16px 0 !important; }
+  .st-points .elementor-icon-list-item + .elementor-icon-list-item { border-left: 0; border-top: 1px solid var(--st-hl); }
+  .st-points .elementor-icon-list-icon { width: 46px; height: 46px; }
+}
+
+/* sticky header contact button: filled 崧達綠 with black text (outline green text was 2.3:1) */
+#page .sticky-header-white .btn-contact a { background-color: var(--st-songtah); border-color: var(--st-songtah) !important; color: var(--st-black) !important; }
+#page .sticky-header-white .btn-contact:hover a { background-color: var(--st-lime); border-color: var(--st-lime) !important; color: var(--st-black) !important; }
+
+/* product loop cards (brand / category pages): text link in 千歲綠, 崧達綠 text on paper is 2.3:1 */
+.elementor-2025 .elementor-button, .elementor-2025 .elementor-button-text, .elementor-2025 .elementor-button-icon i { color: var(--st-chitose) !important; }
+.elementor-2025 .elementor-button-icon svg { fill: var(--st-chitose) !important; }
+
+/* news dates: muted but readable (was 54% black, 3.9:1) */
+[data-id="8adbee1"], [data-id="8adbee1"] * { color: #6B6458 !important; }
+
+/* regional sales tabs: active tab is 崧達綠, so its label is black */
+[data-id="ddf694c"] .e-n-tab-title[aria-selected="true"], [data-id="ddf694c"] .e-n-tab-title[aria-selected="true"] * { color: var(--st-black) !important; }
+/* team cards: contact icons were Lime on paper (1.4:1); Lime belongs to dark sections */
+[data-widget_type="eael-team-member.default"] .eael-team-member-social-link i,
+[data-widget_type="eael-team-member.default"] i { color: var(--st-chitose) !important; }
+[data-widget_type="eael-team-member.default"] a:hover i { color: var(--st-songtah) !important; }
+
+/* support page: warranty note sits flat inside its panel (was a card within a card) */
+.elementor .elementor-element.elementor-element-4d4b67d {
+  background: none !important; border: 0 !important; border-top: 1px solid var(--st-hl) !important; border-radius: 0 !important;
+  padding: 22px 0 0 !important; margin-top: 8px !important;
+}
+.elementor-element-4d4b67d .elementor-widget-container { padding: 0 !important; text-align: left; }
+.elementor-element-4d4b67d .elementor-widget-container p { margin: 0; color: var(--st-chitose) !important; font-weight: 500; }
+
+/* WordPress galleries: 2 columns on phones instead of overflowing */
+@media (max-width: 640px) {
+  .gallery[class*="gallery-columns-"] { width: 100% !important; margin: 0 !important; display: grid !important; grid-template-columns: 1fr 1fr; gap: 12px; }
+  .gallery[class*="gallery-columns-"] .gallery-item { width: auto !important; max-width: none !important; margin: 0 !important; padding: 0 !important; }
+  .gallery[class*="gallery-columns-"] br { display: none; }
+  .gallery .gallery-item img { width: 100%; height: auto; }
+}
+
+/* thin scrollbars in brand colors */
+html { scrollbar-color: var(--st-forest-700) var(--st-paper); }
+
+/* ---------- V4 「精工」 site-wide (chosen 2026-10-31; the home page has its own file, home-v4.css) ---------- */
+/* section headings share one scale; page heroes keep their own size */
+body:not(.home) h2.elementor-heading-title:not(:is([data-id="13896c5"], [data-id="3da28cb5"], [data-id="724cdf5"], [data-id="6cb3520b"], .e-loop-item, .elementor-2656) *) {
+  font-size: clamp(28px, 2.5vw, 36px) !important; line-height: 1.4 !important; letter-spacing: .06em !important; font-weight: 400 !important;
+}
+
+/* closing CTA bands: solid 千歲綠 instead of a photo under an overlay */
+:is([data-id="7d6be3c"], [data-id="69ae108"], [data-id="49e212b"], [data-id="474b919"]) { background: var(--st-chitose) !important; }
+/* mid-page statement band (about): walnut */
+[data-id="6c6d108"] { background: var(--st-walnut) !important; }
+:is([data-id="7d6be3c"], [data-id="69ae108"], [data-id="49e212b"], [data-id="474b919"], [data-id="6c6d108"]) > .elementor-motion-effects-container { display: none !important; }
+:is([data-id="7d6be3c"], [data-id="69ae108"], [data-id="49e212b"], [data-id="474b919"], [data-id="6c6d108"])::before { background: none !important; opacity: 0 !important; }
+
+/* listing cards (products, news, cases): ruled frames */
+:is([data-id="917f340"], [data-id="438672d"], [data-id="7fad719"]) > .e-con-inner {
+  height: 100%; padding: 0 0 28px !important; gap: 14px !important; overflow: hidden;
+  border: 1px solid var(--st-hl); border-radius: 2px; background: rgba(255, 255, 255, .5);
+  transition: border-color .5s var(--st-ease), background-color .5s var(--st-ease);
+}
+:is([data-id="917f340"], [data-id="438672d"], [data-id="7fad719"]):hover > .e-con-inner { border-color: rgba(51, 74, 51, .45); background: #fff; }
+:is([data-id="917f340"], [data-id="438672d"], [data-id="7fad719"]) > .e-con-inner > .elementor-widget { padding-inline: 24px; margin: 0 !important; }
+:is([data-id="917f340"], [data-id="438672d"], [data-id="7fad719"]) .elementor-heading-title { font-size: 19px !important; line-height: 1.5 !important; font-weight: 500 !important; letter-spacing: .04em !important; }
+:is([data-id="917f340"], [data-id="438672d"], [data-id="7fad719"]) > .e-con-inner > .e-con:first-child { border-radius: 0 !important; margin: 0 !important; }
+@media (prefers-reduced-motion: reduce) {
+  :is([data-id="917f340"], [data-id="438672d"], [data-id="7fad719"]) > .e-con-inner { transition: none; }
+}
+
+/* inline number badges (courses): V4 uses quiet numerals, not white-on-green chips */
+.elementor-heading-title > span[style*="background-color:#ABCE33"] {
+  background: none !important; color: var(--st-chitose) !important; padding: 0 !important; border-radius: 0 !important;
+  margin-right: 14px !important; font: 300 1.35em/1 "Montserrat", sans-serif; letter-spacing: .04em; vertical-align: -2px;
+}
+
+/* brand index: logos centred in their frames */
+.elementor-2656 [data-id="caff39e"] .e-con[data-eael-wrapper-link] .elementor-widget-image { width: 100%; text-align: center !important; }
+.elementor-2656 [data-id="caff39e"] .e-con[data-eael-wrapper-link] .elementor-widget-image img { margin-inline: auto; }
+
+/* Elementor post cards, slides, post info, pagination: AA contrast on paper */
+.elementor-slide-button { color: var(--st-black) !important; }
+.elementor-post__excerpt, .elementor-post__excerpt p { color: #4A463F !important; }
+.elementor-post__read-more { color: var(--st-chitose) !important; }
+.elementor-post-date, .elementor-post__meta-data { color: #6B6458 !important; }
+.elementor-post-info__item, .elementor-widget-post-info .elementor-icon-list-text { color: #6B6458 !important; }
+.elementor-pagination .page-numbers.current { color: var(--st-black) !important; border-radius: 2px !important; }
+.elementor-pagination a.page-numbers:hover { color: var(--st-chitose) !important; }
+
+/* contact form as primary conversion (conversion.py) */
+.st-form-ctx { margin: 0 0 16px; padding: 10px 14px; border-left: 3px solid var(--st-green, #62B320); background: rgba(255,255,255,.6); color: var(--st-chitose, #334A33); font-size: 15px; }
+.st-form-note .elementor-widget-container { color: #4A463F; font-size: 15px; line-height: 1.85; margin-bottom: 24px; }
+.wpcf7-form select.wpcf7-select { width: 100%; appearance: none; -webkit-appearance: none; background-color: #fff; border: 1px solid var(--st-hl, #D9D6CE); border-radius: 2px; padding: 12px 14px; font: inherit; color: var(--st-black, #12100F); }
+.wpcf7-form select.wpcf7-select:invalid, .wpcf7-form select.wpcf7-select option[value=""] { color: #6B6458; }
+
+/* courses from the enterprise system (courses.py) */
+.st-course-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(320px, 1fr)); gap: 32px; }
+.st-course .elementor-post__card { background: #fff; border: 1px solid var(--st-hl, #D9D6CE); border-radius: 2px; overflow: hidden; display: flex; flex-direction: column; }
+.st-course .elementor-post__thumbnail { aspect-ratio: auto; }
+.st-course .elementor-post__thumbnail img { width: 100%; height: auto; display: block; }
+.st-course .elementor-post__text { padding: 24px 24px 28px; display: flex; flex-direction: column; gap: 10px; flex: 1; }
+.st-course-kind { font-family: Montserrat, "Noto Sans TC", sans-serif; font-size: 12px; letter-spacing: .12em; color: var(--st-chitose, #334A33); }
+.st-course .elementor-post__title { font-size: 20px; font-weight: 500; line-height: 1.45; color: var(--st-black, #12100F); margin: 0; }
+.st-course-facts { display: flex; flex-wrap: wrap; gap: 6px 0; font-size: 14px; color: #4A463F; }
+.st-course-facts span + span::before { content: "・"; margin: 0 6px; color: #A39E94; }
+.st-course .elementor-post__excerpt p { font-size: 15px; line-height: 1.8; color: #4A463F; margin: 0; display: -webkit-box; -webkit-line-clamp: 4; -webkit-box-orient: vertical; overflow: hidden; }
+.st-course-btn.elementor-button { align-self: flex-start; margin-top: auto; background: var(--st-green, #62B320) !important; color: var(--st-black, #12100F) !important; border-radius: 2px; padding: 12px 22px; font-weight: 500; }
+.st-course-btn.elementor-button:hover { filter: brightness(1.08); }
+.st-course-closed { align-self: flex-start; margin-top: auto; font-size: 14px; color: #6B6458; border: 1px solid var(--st-hl, #D9D6CE); border-radius: 2px; padding: 10px 16px; }
+.st-course-empty { grid-column: 1 / -1; padding: 32px; border: 1px dashed var(--st-hl, #D9D6CE); border-radius: 2px; color: #4A463F; text-align: center; }
+.st-past { margin-top: 56px; border-top: 1px solid var(--st-hl, #D9D6CE); }
+.st-past-title { font-size: 16px; font-weight: 500; letter-spacing: .08em; color: var(--st-chitose, #334A33); margin: 24px 0 8px; }
+.st-past-row { display: grid; grid-template-columns: 120px 1fr auto; gap: 16px; padding: 12px 0; border-bottom: 1px solid var(--st-hl, #D9D6CE); font-size: 15px; color: var(--st-black, #12100F); }
+.st-past-date { font-family: Montserrat, "Noto Sans TC", sans-serif; color: #6B6458; }
+.st-past-kind { font-size: 13px; color: #6B6458; }
+@media (max-width: 767px) { .st-past-row { grid-template-columns: 96px 1fr; } .st-past-kind { display: none; } }
+.st-course-grid--single { grid-template-columns: 1fr; }
+@media (min-width: 900px) {
+  .st-course-grid--single .st-course .elementor-post__card { flex-direction: row; }
+  .st-course-grid--single .st-course .elementor-post__thumbnail__link { flex: 0 0 52%; display: flex; align-items: center; background: #F6F5F2; }
+  .st-course-grid--single .st-course .elementor-post__text { padding: 36px 40px; }
+  .st-course-grid--single .st-course .elementor-post__title { font-size: 26px; }
+  .st-course-grid--single .st-course .elementor-post__excerpt p { -webkit-line-clamp: 6; }
+}
+/* past courses with their banners */
+.st-past-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(300px, 1fr)); gap: 28px; margin: 16px 0 24px; }
+.st-past-card { background: #fff; border: 1px solid var(--st-hl, #D9D6CE); border-radius: 2px; overflow: hidden; display: flex; flex-direction: column; }
+.st-past-card img { width: 100%; height: auto; display: block; }
+.st-past-body { padding: 18px 20px 22px; display: flex; flex-direction: column; gap: 8px; flex: 1; }
+.st-past-body h4 { margin: 0; font-size: 17px; font-weight: 500; line-height: 1.5; color: var(--st-black, #12100F); }
+.st-past-body p { margin: 0; font-size: 14px; line-height: 1.75; color: #4A463F; display: -webkit-box; -webkit-line-clamp: 3; -webkit-box-orient: vertical; overflow: hidden; }
+.st-past-body .st-course-facts { font-size: 13px; }
+.st-past-poster { margin-top: auto; padding-top: 6px; font-size: 14px; color: var(--st-chitose, #334A33); text-decoration: underline; text-underline-offset: 3px; }
+/* home 近期課程: one open course beside two past ones */
+.st-home-courses { grid-template-columns: repeat(3, 1fr); align-items: stretch; }
+.st-home-courses .st-course .elementor-post__card, .st-home-courses .st-past-card { height: 100%; }
+.st-home-courses .st-course .elementor-post__excerpt p { -webkit-line-clamp: 3; }
+.st-home-courses .st-course .elementor-post__thumbnail img, .st-home-courses .st-past-card img { aspect-ratio: 2000 / 770; object-fit: cover; }
+@media (max-width: 1024px) { .st-home-courses { grid-template-columns: 1fr 1fr; } }
+@media (max-width: 640px) { .st-home-courses { grid-template-columns: 1fr; } }
+
+/* about: TFDA licences (licenses.py) */
+[data-id="c812c27"] .gallery-caption { display: flex; flex-direction: column; gap: 2px; padding-top: 10px; text-align: center; }
+[data-id="c812c27"] .st-lic-name { font-size: 15px; color: var(--st-black, #12100F); line-height: 1.5; }
+[data-id="c812c27"] .st-lic-meta { font-size: 13px; color: #6B6458; }
+[data-id="c812c27"] img { border: 1px solid var(--st-hl, #D9D6CE); background: #fff; aspect-ratio: 300 / 424; object-fit: cover; object-position: top; }
+
+/* header menu stays on one line down to the tablet breakpoint; the language globe never wraps under the menu */
+.elementor-nav-menu--main > ul.elementor-nav-menu { flex-wrap: nowrap !important; }
+.elementor-nav-menu--main > ul.elementor-nav-menu > li { flex: none; }
+@media (min-width: 1025px) and (max-width: 1180px) {
+  .elementor-nav-menu--main > ul.elementor-nav-menu > li > a.elementor-item { font-size: 15px !important; letter-spacing: .02em !important; }
+  .elementor-nav-menu--main > ul.elementor-nav-menu > li:not(.btn-contact):not(.btn-lang-img) > a.elementor-item {
+    padding-left: clamp(11px, calc(11px + (100vw - 1025px) * .0258), 15px) !important;
+    padding-right: clamp(11px, calc(11px + (100vw - 1025px) * .0258), 15px) !important;
+  }
+  .elementor-nav-menu--main > ul.elementor-nav-menu > li.btn-contact { margin-left: 8px; }
+}
+/* back-to-top is deep green too: a light ring keeps it visible over the green footer */
+#ast-scroll-top { box-shadow: 0 0 0 1px rgba(243, 242, 238, .45) !important; }

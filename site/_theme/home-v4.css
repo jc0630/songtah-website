@@ -1,0 +1,259 @@
+/* Home direction V4 「精工」 — chosen 2026-10-31 from the five-way comparison
+   (public/_proposal/variants). Every value is a --v-* variable set on .home below;
+   loaded after home.css by _build/tools/home_redesign.py. */
+.home {
+  --v-paper: #F6F5F2; --v-paper-2: #EDECE7; --v-heading: #334A33; --v-ink: #22201D; --v-line: rgba(51, 74, 51, .2);
+  --v-weight: 400; --v-track: .06em; --v-h2: 36px; --v-h-lh: 1.4; --v-hero: 76px;
+  --v-body: 15px; --v-lh: 1.85; --v-pad: .9; --v-radius: 12px;
+  --v-accent: #62B320; --v-accent-ink: #12100F;
+  --v-band: #2A1D14; --v-band-ink: #F3F2EE; --v-band-num: #B2E901; --v-band-line: rgba(243, 242, 238, .18);
+  --v-cta: #334A33; --v-cta-ink: #F3F2EE;
+}
+/* service columns become a ruled grid */
+
+
+.home {
+  --v-font: "Noto Sans TC", sans-serif;
+  --v-num-font: "Montserrat", "Noto Sans TC", sans-serif;
+}
+
+/* surfaces */
+body.home, .home .site, .home .site-content,
+.home .ast-separate-container, .home.ast-page-builder-template .site-content { background-color: var(--v-paper) !important; }
+.home { --hl: var(--v-line); }
+.home [data-id="523ac17"] { background-color: var(--v-paper-2) !important; }
+.home .sticky-header-white.elementor-sticky--active { background-color: color-mix(in srgb, var(--v-paper) 88%, transparent) !important; }
+
+/* type: section headings on paper */
+.home .elementor-heading-title { font-family: var(--v-font) !important; letter-spacing: var(--v-track) !important; }
+.home :is([data-id="a0b5e6b"], [data-id="c0d2f1f"], [data-id="524bf1c"], [data-id="2355de0"], [data-id="4240745"], [data-id="59fd481"]) .elementor-heading-title {
+  font-size: var(--v-h2) !important; font-weight: var(--v-weight) !important; line-height: var(--v-h-lh) !important;
+}
+.home :is([data-id="a0b5e6b"], [data-id="c0d2f1f"], [data-id="524bf1c"], [data-id="2355de0"]) .elementor-heading-title { color: var(--v-heading) !important; }
+.home [data-id="347aaf9"] .elementor-heading-title { font-size: var(--v-hero) !important; font-weight: var(--v-weight) !important; line-height: 1.15 !important; }
+
+/* body copy on paper */
+.home :is([data-id="f14cb6f"], [data-id="523ac17"], [data-id="ebfc1c4"], [data-id="478bb36"]) .elementor-widget-text-editor .elementor-widget-container {
+  font-size: var(--v-body) !important; line-height: var(--v-lh) !important; color: var(--v-ink) !important;
+}
+
+/* rhythm */
+.home :is([data-id="f14cb6f"], [data-id="523ac17"], [data-id="ebfc1c4"], [data-id="bd50012"]) { padding-block: calc(128px * var(--v-pad)) !important; }
+.home [data-id="478bb36"] { padding-block: calc(104px * var(--v-pad)) !important; }
+.home [data-id="d7f5552"] { padding-block: calc(112px * var(--v-pad)) !important; }
+
+/* primary buttons */
+.home :is([data-id="8454544"], [data-id="47fa55a"]) .elementor-button {
+  background: var(--v-accent) !important; color: var(--v-accent-ink) !important; border-radius: var(--v-radius) !important;
+}
+.home :is([data-id="8454544"], [data-id="47fa55a"]) .elementor-button:hover { filter: brightness(1.08); }
+.home [data-id="3ce8a46"] .elementor-button { border-radius: var(--v-radius) !important; }
+
+/* process band */
+.home [data-id="bd50012"] { background-color: var(--v-band) !important; }
+.home [data-id="4240745"] .elementor-heading-title,
+.home [data-id="676bbaf"] .elementor-icon-box-description { color: var(--v-band-ink) !important; }
+.home [data-id="676bbaf"] .elementor-icon-box-content::before { color: var(--v-band-num) !important; font-family: var(--v-num-font); }
+
+/* closing CTA band */
+.home [data-id="d7f5552"] { background: var(--v-cta) !important; }
+.home [data-id="59fd481"] .elementor-heading-title { color: var(--v-cta-ink) !important; }
+.home [data-id="9025254"] .elementor-widget-container { color: var(--v-cta-ink) !important; opacity: .8; }
+
+/* images and cards */
+.home :is([data-id="5b5390c"], [data-id="616a275"], [data-id="2328d15"], [data-id="a71b877"], [data-id="af9a821"], [data-id="762d74c"], [data-id="1f59c74"]),
+.home [data-id="478bb36"] img { border-radius: var(--v-radius) !important; overflow: hidden; }
+
+/* small screens: scale display sizes down with the viewport */
+@media (max-width: 767px) {
+  .home :is([data-id="a0b5e6b"], [data-id="c0d2f1f"], [data-id="524bf1c"], [data-id="2355de0"], [data-id="4240745"], [data-id="59fd481"]) .elementor-heading-title { font-size: calc(var(--v-h2) * .72) !important; }
+  .home [data-id="347aaf9"] .elementor-heading-title { font-size: calc(var(--v-hero) * .6) !important; }
+  .home :is([data-id="f14cb6f"], [data-id="523ac17"], [data-id="ebfc1c4"], [data-id="bd50012"], [data-id="478bb36"], [data-id="d7f5552"]) { padding-block: calc(80px * var(--v-pad)) !important; }
+}
+
+/* hero: agency brand logos along the bottom edge */
+.home [data-id="13896c5"] { position: relative; }
+.home .st-brands { position: absolute; left: 0; right: 0; bottom: 40px; width: min(100% - 60px, 1380px); margin-inline: auto; display: flex; align-items: center; justify-content: space-between; flex-wrap: nowrap; gap: 18px 20px; padding-top: 22px; padding-right: 72px; border-top: 1px solid rgba(254, 250, 224, .22); }
+.home .st-brands-label { font-size: 12px; letter-spacing: .14em; color: rgba(254, 250, 224, .7); margin-right: 8px; white-space: nowrap; }
+.home .st-brands a { display: inline-flex; align-items: center; justify-content: center; height: 24px; flex: 0 1 auto; min-width: 0; opacity: .82; transition: opacity .2s; }
+.home .st-brands a:hover { opacity: 1; }
+.home .st-brands img { height: 100%; width: auto; max-width: 108px; object-fit: contain; filter: brightness(0) invert(1); }
+@media (max-width: 1024px) { .home .st-brands { flex-wrap: wrap; justify-content: flex-start; padding-right: 0; gap: 14px 24px; } .home .st-brands a { height: 22px; } .home .st-brands img { max-width: 104px; } }
+@media (max-width: 767px) { .home .st-brands { bottom: 24px; gap: 12px 18px; } .home .st-brands-label { width: 100%; margin: 0; } .home .st-brands a { height: 16px; } .home .st-brands img { max-width: 76px; } }
+
+/* process band: the walnut must show through the motion layer (home.css left it light oak) */
+.home [data-id="bd50012"] > .elementor-motion-effects-container > .elementor-motion-effects-layer { background-color: var(--v-band) !important; }
+.home [data-id="676bbaf"] .st-step-text { margin: 12px 0 0; font-size: 14px; line-height: 1.8; color: rgba(243, 242, 238, .72); padding-right: 20px; }
+.home [data-id="676bbaf"] .st-step-link { display: inline-block; margin-top: 14px; font-size: 13px; letter-spacing: .08em; color: var(--v-band-num); border-bottom: 1px solid rgba(178, 233, 1, .4); padding-bottom: 2px; text-decoration: none; }
+.home [data-id="676bbaf"] .st-step-link:hover { border-bottom-color: var(--v-band-num); }
+
+/* service tiles: one line under each title, whole tile reads as a link */
+.home [data-id="bd91040"] .st-tile-text { margin: 10px auto 0; max-width: 22em; font-size: 14px; line-height: 1.75; color: #4A463F; }
+
+/* ---------- cards, not rows: service tiles and process steps at every width ---------- */
+.home [data-id="3a9896d"] { display: grid !important; grid-template-columns: repeat(4, 1fr); gap: 20px !important; border: 0 !important; }
+.home [data-id="3a9896d"] > .elementor-widget { width: auto !important; margin: 0 !important; }
+.home [data-id="3a9896d"] > .elementor-widget .elementor-widget-container,
+.home [data-id="3a9896d"] > .elementor-widget + .elementor-widget .elementor-widget-container {
+  height: 100%; padding: 36px 28px 32px !important; background: #fff !important; border: 1px solid var(--v-line) !important; border-radius: 2px;
+  transition: border-color .2s, box-shadow .2s;
+}
+.home [data-id="3a9896d"] > .elementor-widget:hover .elementor-widget-container { border-color: #62B320 !important; box-shadow: 0 8px 24px rgba(42, 29, 20, .06) !important; }
+.home [data-id="3a9896d"] .elementor-icon-box-wrapper { display: flex !important; flex-direction: column !important; align-items: center; text-align: center !important; }
+.home [data-id="3a9896d"] .elementor-icon-box-icon { margin: 0 0 18px !important; }
+.home [data-id="3a9896d"] .elementor-icon-box-title { margin: 0 !important; font-size: 18px !important; line-height: 1.5 !important; }
+.home [data-id="3a9896d"] .st-tile-text { margin: 10px 0 0; max-width: none; }
+
+.home [data-id="676bbaf"] { display: grid !important; grid-template-columns: repeat(5, 1fr); gap: 16px !important; }
+.home [data-id="676bbaf"] > .elementor-widget { width: auto !important; margin: 0 !important; }
+.home [data-id="676bbaf"] .elementor-widget-container {
+  height: 100%; padding: 28px 24px 26px !important; border: 1px solid rgba(254, 250, 224, .12) !important;
+  background: rgba(254, 250, 224, .04) !important; border-radius: 2px; transition: border-color .2s, background-color .2s;
+}
+.home [data-id="676bbaf"] > .elementor-widget:hover .elementor-widget-container { border-color: rgba(178, 233, 1, .45) !important; background: rgba(254, 250, 224, .07) !important; }
+.home [data-id="676bbaf"] .elementor-icon-box-wrapper, .home [data-id="676bbaf"] .elementor-icon-box-content { display: flex !important; flex-direction: column !important; align-items: flex-start !important; height: 100%; }
+.home [data-id="676bbaf"] .elementor-icon-box-content::before { margin: 0 0 16px !important; font-size: 2rem !important; }
+.home [data-id="676bbaf"] .st-step-text { padding-right: 0; }
+.home [data-id="676bbaf"] .st-step-link { margin-top: auto; padding-top: 16px; border-bottom: 0; }
+.home [data-id="676bbaf"] .st-step-link::after { content: " →"; }
+
+@media (max-width: 1100px) {
+  .home [data-id="3a9896d"] { grid-template-columns: repeat(2, 1fr); }
+  .home [data-id="676bbaf"] { grid-template-columns: repeat(3, 1fr); }
+}
+@media (max-width: 767px) {
+  .home [data-id="676bbaf"] { grid-template-columns: repeat(2, 1fr); gap: 12px !important; }
+  .home [data-id="676bbaf"] .elementor-widget-container { padding: 22px 18px 20px !important; }
+  .home [data-id="676bbaf"] .elementor-icon-box-description { font-size: 16px !important; }
+}
+@media (max-width: 560px) {
+  .home [data-id="3a9896d"] { grid-template-columns: 1fr; gap: 12px !important; }
+  .home [data-id="676bbaf"] { grid-template-columns: 1fr; }
+}
+.home [data-id="3a9896d"] .elementor-icon-box-title { letter-spacing: .04em !important; }
+/* tablet: 3 + 2 steps, the last row stretched so no slot is left empty */
+@media (max-width: 1100px) and (min-width: 768px) {
+  .home [data-id="676bbaf"] { grid-template-columns: repeat(6, 1fr); }
+  .home [data-id="676bbaf"] > .elementor-widget { grid-column: span 2; }
+  .home [data-id="676bbaf"] > .elementor-widget:nth-child(n+4) { grid-column: span 3; }
+}
+/* phone 2-up: the fifth step takes the full row */
+@media (max-width: 767px) and (min-width: 561px) {
+  .home [data-id="676bbaf"] > .elementor-widget:last-child { grid-column: 1 / -1; }
+}
+.home [data-id="3a9896d"] h2.elementor-icon-box-title, .home [data-id="3a9896d"] h2.elementor-icon-box-title a { font-size: 19px !important; line-height: 1.5 !important; font-weight: 500 !important; text-wrap: balance; }
+/* tagline over the service cards (home_redesign.SVC_HEAD) */
+.home .st-svc-head { width: 100%; text-align: center; margin: 0 auto 48px; }
+.home .st-svc-title { margin: 0; font-family: var(--v-font); font-size: var(--v-h2); font-weight: var(--v-weight); line-height: var(--v-h-lh); letter-spacing: var(--v-track); color: var(--v-heading); text-wrap: balance; }
+.home .st-svc-sub { margin: 14px auto 0; max-width: 36em; font-size: 15px; line-height: 1.85; color: #4A463F; }
+@media (max-width: 767px) { .home .st-svc-head { margin-bottom: 32px; } .home .st-svc-title { font-size: 26px; } }
+/* agency brands: own section under the hero (home_redesign.BRAND_BAND) */
+.home .st-brand-band { background: var(--v-paper); padding: 104px 0 112px; }
+.home .st-brand-band-in { width: min(100% - 40px, 1320px); margin-inline: auto; text-align: center; }
+.home .st-brand-band-eyebrow { margin: 0 0 12px; font-family: var(--v-num-font); font-size: 13px; letter-spacing: .2em; color: #62B320; }
+.home .st-brand-band-title { margin: 0; font-family: var(--v-font); font-size: var(--v-h2); font-weight: var(--v-weight); line-height: var(--v-h-lh); letter-spacing: var(--v-track); color: var(--v-heading); text-wrap: balance; }
+.home .st-brand-band-sub { margin: 14px auto 0; max-width: 36em; font-size: 15px; line-height: 1.85; color: #4A463F; }
+.home .st-brand-grid { margin-top: 48px; display: grid; grid-template-columns: repeat(5, minmax(0, 1fr)); gap: 16px; }
+.home .st-brand-tile { display: grid; place-items: center; aspect-ratio: 16 / 7; padding: 22px 28px; background: #fff; border-radius: var(--ac-r, 28px); }
+.home .st-brand-tile img { grid-area: 1 / 1; max-width: 100%; max-height: 44px; width: auto; height: auto; object-fit: contain; opacity: .8; transition: opacity .4s; border-radius: 0 !important; }
+.home .st-brand-tile:hover img { opacity: 1; }
+/* hover: the monochrome logo gives way to the brand's own colour logo stacked in the same cell */
+.home .st-brand-tile .st-brand-color { opacity: 0; }
+.home .st-brand-tile:is(:hover, :focus-visible) .st-brand-color { opacity: 1; }
+.home .st-brand-tile:is(:hover, :focus-visible):has(.st-brand-color) img:not(.st-brand-color) { opacity: 0; }
+@media (max-width: 1024px) { .home .st-brand-grid { grid-template-columns: repeat(3, minmax(0, 1fr)); } .home .st-brand-tile:nth-child(10) { grid-column: 2; } }
+@media (max-width: 767px) {
+  .home .st-brand-band { padding: 64px 0 72px; }
+  .home .st-brand-band-title { font-size: 26px; }
+  .home .st-brand-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 12px; margin-top: 32px; }
+  .home .st-brand-tile:nth-child(10) { grid-column: auto; }
+  .home .st-brand-tile { padding: 16px 18px; }
+  .home .st-brand-tile img { max-height: 34px; }
+}
+
+/* 崧達的價值: the dental-model photo becomes the section's backdrop (was a separate image column) */
+.home [data-id="f14cb6f"] {
+  position: relative;
+  background:
+    linear-gradient(90deg, rgba(42, 29, 20, .86) 0%, rgba(42, 29, 20, .7) 48%, rgba(42, 29, 20, .28) 100%),
+    url("../wp-content/uploads/2026/08/dental_materials_1787196270407-CwvIZGFt.jpg") 70% 55% / cover no-repeat !important;
+}
+.home [data-id="f14cb6f"] [data-id="5b5390c"] { display: none !important; }
+.home [data-id="f14cb6f"] [data-id="4f5bb05"] { flex: 0 1 760px !important; max-width: 760px; }
+.home [data-id="f14cb6f"] [data-id="a0b5e6b"] .elementor-heading-title { color: #FEFAE0 !important; }
+.home [data-id="f14cb6f"] [data-id="e0fa196"] .elementor-widget-container,
+.home [data-id="f14cb6f"] [data-id="e0fa196"] p { color: rgba(243, 242, 238, .86) !important; }
+.home [data-id="f14cb6f"] .st-points .elementor-icon-list-item { background: rgba(255, 255, 255, .94) !important; }
+@media (max-width: 1024px) {
+  .home [data-id="f14cb6f"] { background:
+    linear-gradient(180deg, rgba(42, 29, 20, .84) 0%, rgba(42, 29, 20, .74) 100%),
+    url("../wp-content/uploads/2026/08/dental_materials_1787196270407-CwvIZGFt.jpg") 60% 50% / cover no-repeat !important; }
+  .home [data-id="f14cb6f"] [data-id="4f5bb05"] { flex-basis: 100% !important; max-width: none; }
+}
+/* workflow band: once Elementor lazy-loads its photo, a deep walnut veil keeps the steps readable (user: 遮罩再黑一點) */
+.home [data-id="bd50012"] { box-shadow: inset 0 0 0 100vmax rgba(30, 21, 14, .86) !important; }
+.home [data-id="bd50012"] > .e-con-inner, .home [data-id="bd50012"] > * { position: relative; z-index: 1; }
+/* hero: bright training-centre photo needs a firmer veil behind the white copy on the left */
+.home [data-id="b5fb0b2"]::before {
+  background-image: linear-gradient(180deg, rgba(30, 21, 14, .5) 0%, rgba(30, 21, 14, 0) 24%),
+    linear-gradient(90deg, rgba(30, 21, 14, .84) 0%, rgba(30, 21, 14, .66) 38%, rgba(30, 21, 14, .18) 70%, rgba(30, 21, 14, 0) 100%) !important;
+}
+@media (max-width: 767px) { .home [data-id="b5fb0b2"]::before { background-image: linear-gradient(180deg, rgba(30, 21, 14, .55) 0%, rgba(30, 21, 14, .7) 100%) !important; } }
+/* 崧達的價值: people at work instead of a dental model — staff fitting loupes with a visitor (Songtah event photo) */
+.home [data-id="f14cb6f"] {
+  background:
+    linear-gradient(90deg, rgba(30, 21, 14, .88) 0%, rgba(30, 21, 14, .74) 42%, rgba(30, 21, 14, .3) 70%, rgba(30, 21, 14, .12) 100%),
+    url("../wp-content/uploads/2026/home/value-loupes.webp") center 32% / cover no-repeat #1E150E !important;
+}
+@media (max-width: 1024px) {
+  .home [data-id="f14cb6f"] { background:
+    linear-gradient(180deg, rgba(30, 21, 14, .82) 0%, rgba(30, 21, 14, .78) 100%),
+    url("../wp-content/uploads/2026/home/value-loupes.webp") 62% center / cover no-repeat #1E150E !important; }
+}
+/* process band: each step card opens with a photo of that step */
+.home [data-id="bd50012"] .elementor-icon-box-wrapper { display: flex !important; flex-direction: column; align-items: stretch !important; }
+.home [data-id="bd50012"] .st-step-pic { order: -1; width: 100%; max-width: none; margin: 0 0 22px; aspect-ratio: 16 / 10; border-radius: 14px; overflow: hidden; background: #2a221c; }
+.home [data-id="bd50012"] .st-step-pic img { width: 100%; height: 100%; object-fit: cover; display: block; border-radius: 0 !important; }
+/* 崧達的價值: the visitor's face sat behind the heading (user, 2026-11-02: 區塊往下一點、客戶的臉露出來).
+   The photo now spans the width from the top edge, the copy starts below the faces (≈35% of the photo's height),
+   and the veil is light over the faces and deepens behind the copy. */
+.home [data-id="f14cb6f"], .home [data-id="f14cb6f"][data-id] {
+  padding-top: max(300px, calc(min(100vw, 1920px) * .36)) !important;
+  background:
+    linear-gradient(180deg, rgba(30, 21, 14, .18) 0%, rgba(30, 21, 14, .22) calc(min(100vw, 1920px) * .2), rgba(30, 21, 14, .8) calc(min(100vw, 1920px) * .4), rgba(30, 21, 14, .9) 100%),
+    url("../wp-content/uploads/2026/home/value-loupes.webp") center top / 100% auto no-repeat #1E150E !important;
+}
+@media (max-width: 1024px) {
+  .home [data-id="f14cb6f"], .home [data-id="f14cb6f"][data-id] { padding-top: max(170px, calc(100vw * .4)) !important; }
+}
+.home [data-id="f14cb6f"] > .e-con-inner, .home [data-id="f14cb6f"] [data-id="4f5bb05"] { min-height: 0 !important; height: auto !important; }
+.home [data-id="f14cb6f"] { min-height: 0 !important; --min-height: 0px !important; }
+/* the column is in a vertical flex: flex-basis 760px became its height, not its width */
+.home [data-id="f14cb6f"] [data-id="4f5bb05"] { flex: 0 0 auto !important; width: 100%; max-width: 760px; }
+@media (max-width: 1024px) { .home [data-id="f14cb6f"] [data-id="4f5bb05"] { max-width: none; } }
+/* twelve brands since Yamahachi and Borea joined (2026-11-02): six to a row */
+.home .st-brand-grid { grid-template-columns: repeat(6, minmax(0, 1fr)); }
+@media (min-width: 1200px) { .home .st-brand-grid { grid-template-columns: repeat(5, minmax(0, 1fr)); } }   /* larger tiles over three rows (user, 2026-11-03: 這邊可以做到第三排) */
+@media (max-width: 1024px) { .home .st-brand-grid { grid-template-columns: repeat(4, minmax(0, 1fr)); } }
+@media (max-width: 767px) { .home .st-brand-grid { grid-template-columns: repeat(3, minmax(0, 1fr)); } }
+@media (max-width: 480px) { .home .st-brand-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); } }
+/* 崧達的價值: shorter photo band (user, 2026-11-02: 圖高度再短一點). The photo moves up by its empty ceiling,
+   so the faces stay in view while the heading starts higher. */
+.home [data-id="f14cb6f"], .home [data-id="f14cb6f"][data-id] {
+  padding-top: max(240px, calc(min(100vw, 1920px) * .27)) !important;
+  background:
+    linear-gradient(180deg, rgba(30, 21, 14, .18) 0%, rgba(30, 21, 14, .22) calc(min(100vw, 1920px) * .13), rgba(30, 21, 14, .8) calc(min(100vw, 1920px) * .31), rgba(30, 21, 14, .9) 100%),
+    url("../wp-content/uploads/2026/home/value-loupes.webp") center calc(min(100vw, 1920px) * -.09) / 100% auto no-repeat #1E150E !important;
+}
+@media (max-width: 1024px) {
+  .home [data-id="f14cb6f"], .home [data-id="f14cb6f"][data-id] { padding-top: max(150px, calc(100vw * .32)) !important; }
+}
+@media (max-width: 1024px) {
+  .home [data-id="f14cb6f"], .home [data-id="f14cb6f"][data-id] { background-position: 0 0, center top !important; }
+}
+/* 涵蓋完整牙科數位製程: a scene photo (user, 2026-11-02: 背景要照片情境，網路抓) — a dentist taking an intraoral scan,
+   the scan on the laptop beside (Unsplash photo-1656428964836), under a lighter walnut veil than the old .86 that hid the photo completely */
+.home [data-id="bd50012"], .home [data-id="bd50012"] > .elementor-motion-effects-container > .elementor-motion-effects-layer {
+  background: url("/wp-content/uploads/2026/pages/photo-1656428964836-78d54bf76231.webp") center 30% / cover no-repeat #1E150E !important;
+}
+.home [data-id="bd50012"] { box-shadow: inset 0 0 0 100vmax rgba(30, 21, 14, .78) !important; }

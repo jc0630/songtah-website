@@ -1,0 +1,122 @@
+/* 崧達歷程 (_build/tools/story.py, 2026-11-03).
+   history.html: a vertical timeline on a walnut band, chapter index on the left (sticky on desktop), one line down
+   the page with a card per milestone. 關於崧達: a short entry band (.st-tl-teaser).
+   Cards tilt toward a fine pointer; nothing moves on load or on scroll. */
+.st-tl, .st-tl-teaser {
+  --tl-bg: #1E150E; --tl-ink: #FBF6EC; --tl-mute: rgba(251, 246, 236, .68); --tl-line: rgba(251, 246, 236, .16);
+  --tl-card: #F6F1E7; --tl-card-ink: #12100F; --tl-green: #334A33; --tl-accent: #62B320; --tl-brass: #B8955A;
+  --tl-ease: cubic-bezier(.22, .61, .36, 1);
+  --tl-edge: max(clamp(16px, 4vw, 40px), calc((100% - 1180px) / 2));
+  position: relative; width: 100% !important; max-width: none !important; margin: 0 !important; padding-left: 0 !important; padding-right: 0 !important;
+  color: var(--tl-ink); background: radial-gradient(110% 70% at 90% 0%, #3A2A1C 0%, rgba(58, 42, 28, 0) 60%), var(--tl-bg);
+}
+.st-tl svg, .st-tl-teaser svg { width: 16px; height: 16px; fill: none; stroke: currentColor; stroke-width: 1.8; stroke-linecap: round; stroke-linejoin: round; }
+
+/* ---------- history.html ---------- */
+/* body.st-history .elementor-498: outweighs 關於崧達's own zoom and anchor for this hero (cards-apple.css) */
+body.st-history .elementor-498 [data-id="b5fb0b2"]:not(.elementor-motion-effects-element-type-background),
+body.st-history .elementor-498 [data-id="b5fb0b2"] > .elementor-motion-effects-container > .elementor-motion-effects-layer {
+  background-image: url("../wp-content/uploads/2026/story/story-S__60579980.webp") !important; background-position: center 88% !important; background-size: cover !important;
+}
+.st-tl { padding-top: clamp(64px, 8vw, 112px) !important; padding-bottom: clamp(72px, 9vw, 128px) !important; }
+.st-tl-in { display: grid; grid-template-columns: 200px minmax(0, 1fr); gap: clamp(32px, 5vw, 72px); padding: 0 var(--tl-edge); }
+
+.st-tl-nav { position: relative; }
+.st-tl-nav ol { position: sticky; top: 120px; display: grid; gap: 4px; margin: 0; padding: 0; list-style: none; }
+.st-tl-nav a { display: grid; gap: 4px; padding: 14px 0 14px 18px; border-left: 2px solid var(--tl-line); color: var(--tl-mute); text-decoration: none;
+  transition: color .3s var(--tl-ease), border-color .3s var(--tl-ease); }
+.st-tl-nav-year { font: 600 22px/1 Montserrat, sans-serif; letter-spacing: .04em; color: inherit; }
+.st-tl-nav-name { font-size: 14px; letter-spacing: .08em; }
+.st-tl-nav a:hover, .st-tl-nav a:focus-visible, .st-tl-nav a[aria-current="true"] { color: var(--tl-ink); border-left-color: var(--tl-accent); }
+.st-tl-nav a:focus-visible { outline: 2px solid var(--tl-accent); outline-offset: 2px; }
+
+.st-tl-ch { scroll-margin-top: 110px; }
+.st-tl-ch + .st-tl-ch { margin-top: clamp(56px, 7vw, 96px); }
+.st-tl-ch-head { margin: 0 0 28px; }
+.st-tl-ch-year { margin: 0 0 6px; font: 600 13px/1 Montserrat, sans-serif; letter-spacing: .24em; color: var(--tl-accent); }
+.st-tl-ch-head h2 { margin: 0 0 8px; font: 500 clamp(28px, 3.2vw, 40px)/1.3 "Noto Sans TC", sans-serif; letter-spacing: .04em; color: var(--tl-ink); }
+.st-tl-ch-line { margin: 0; font-size: 16px; line-height: 1.8; color: var(--tl-mute); }
+
+/* the line and the dots */
+.st-tl-list { position: relative; display: grid; gap: 24px; margin: 0; padding: 0 0 0 40px; list-style: none; }
+.st-tl-list::before { content: ""; position: absolute; left: 7px; top: 8px; bottom: 8px; width: 2px; background: var(--tl-line); }
+.st-tl-item { position: relative; }
+.st-tl-dot { position: absolute; left: -40px; top: 34px; width: 16px; height: 16px; border-radius: 50%; background: var(--tl-bg); box-shadow: inset 0 0 0 3px var(--tl-accent); }
+.st-tl-item.is-milestone .st-tl-dot { background: var(--tl-brass); box-shadow: 0 0 0 4px rgba(184, 149, 90, .25); }
+
+/* the card: picture (or a type panel) beside the story */
+.st-tl-card { --rx: 0deg; --ry: 0deg; --mx: 50%; --my: 50%; position: relative; display: grid; grid-template-columns: minmax(0, 5fr) minmax(0, 7fr);
+  overflow: hidden; border-radius: 22px; background: var(--tl-card); color: var(--tl-card-ink);
+  box-shadow: 0 18px 40px rgba(0, 0, 0, .3), 0 2px 6px rgba(0, 0, 0, .2);
+  transform: perspective(1200px) rotateX(var(--rx)) rotateY(var(--ry)); transition: transform .5s var(--tl-ease); }
+.st-tl-card.is-tilting { transition: transform .12s linear; }
+.st-tl-card::after { content: ""; position: absolute; inset: 0; pointer-events: none; opacity: 0; transition: opacity .4s var(--tl-ease);
+  background: radial-gradient(520px circle at var(--mx) var(--my), rgba(255, 255, 255, .34), rgba(255, 255, 255, 0) 45%); mix-blend-mode: soft-light; }
+.st-tl-card.is-tilting::after { opacity: 1; }
+.st-tl-item.is-milestone .st-tl-card { box-shadow: inset 0 0 0 2px var(--tl-brass), 0 18px 40px rgba(0, 0, 0, .3), 0 2px 6px rgba(0, 0, 0, .2); }
+
+.st-tl-pic { margin: 0; min-height: 240px; }
+.st-tl-pic img { display: block; width: 100%; height: 100%; object-fit: cover; }
+.st-tl-type { position: relative; display: grid; place-items: center; min-height: 240px; overflow: hidden;
+  background: linear-gradient(160deg, #3F5A3F 0%, var(--tl-green) 55%, #263826 100%); }
+.st-tl-item:is([data-chapter="start"], [data-chapter="grow"]) .st-tl-type { background: linear-gradient(160deg, #7A5F43 0%, #5A4330 55%, #3F2E20 100%); }
+.st-tl-type::before { content: ""; position: absolute; inset: 14px; border: 1px solid rgba(251, 246, 236, .18); border-radius: 14px; }
+.st-tl-type span { font: 700 clamp(56px, 6vw, 84px)/1 Montserrat, sans-serif; letter-spacing: -.02em; color: transparent; -webkit-text-stroke: 1.5px rgba(251, 246, 236, .7); }
+
+.st-tl-text { display: flex; flex-direction: column; padding: clamp(24px, 3vw, 36px); }
+.st-tl-year { display: flex; align-items: center; gap: 10px; margin: 0 0 10px; font: 600 15px/1 Montserrat, sans-serif; letter-spacing: .14em; color: #4E7A2A; }
+.st-tl-item.is-milestone .st-tl-year { color: #8F6C35; }
+.st-tl-badge { padding: 4px 9px; border-radius: 999px; font: 500 11px/1 "Noto Sans TC", sans-serif; letter-spacing: .1em; color: #6E5226; background: rgba(184, 149, 90, .18); }
+.st-tl-text h3 { margin: 0 0 12px; font: 500 22px/1.45 "Noto Sans TC", sans-serif; letter-spacing: .03em; color: var(--tl-card-ink); }
+.st-tl-text p:not(.st-tl-year) { margin: 0; font-size: 15px; line-height: 1.95; color: #4A443C; }
+.st-tl-link { display: inline-flex; align-items: center; gap: 8px; align-self: flex-start; margin-top: 18px; padding-bottom: 2px;
+  color: var(--tl-green); font-size: 14px; letter-spacing: .08em; text-decoration: none; border-bottom: 1px solid rgba(51, 74, 51, .35); }
+.st-tl-link:hover { border-bottom-color: var(--tl-green); }
+
+@media (max-width: 1024px) {
+  .st-tl-in { grid-template-columns: minmax(0, 1fr); }
+  .st-tl-nav { position: sticky; top: 64px; z-index: 5; margin: 0 calc(-1 * var(--tl-edge)); padding: 10px var(--tl-edge);
+    background: rgba(30, 21, 14, .94); -webkit-backdrop-filter: blur(8px); backdrop-filter: blur(8px); overflow-x: auto; scrollbar-width: none; }
+  .st-tl-nav::-webkit-scrollbar { display: none; }
+  .st-tl-nav ol { position: static; display: flex; gap: 20px; }
+  .st-tl-nav a { padding: 6px 0; border-left: 0; border-bottom: 2px solid transparent; white-space: nowrap; grid-auto-flow: column; gap: 8px; align-items: baseline; }
+  .st-tl-nav a[aria-current="true"] { border-bottom-color: var(--tl-accent); }
+  .st-tl-nav-year { font-size: 16px; }
+}
+@media (max-width: 767px) {
+  .st-tl-list { padding-left: 28px; gap: 18px; }
+  .st-tl-list::before { left: 5px; }
+  .st-tl-dot { left: -28px; top: 26px; width: 12px; height: 12px; }
+  .st-tl-card { grid-template-columns: minmax(0, 1fr); border-radius: 18px; }
+  .st-tl-pic, .st-tl-type { min-height: 0; aspect-ratio: 16 / 9; }
+  .st-tl-text h3 { font-size: 19px; }
+}
+
+/* 董事長的話 closes the page */
+.st-tl-quote { display: grid; grid-template-columns: 200px minmax(0, 1fr); gap: clamp(24px, 3vw, 40px); align-items: center;
+  margin: clamp(64px, 8vw, 104px) 0 0; padding-top: clamp(40px, 5vw, 64px); border-top: 1px solid var(--tl-line); }
+.st-tl-quote img { display: block; width: 100%; aspect-ratio: 1; object-fit: cover; object-position: 30% 30%; border-radius: 50%; }
+.st-tl-quote blockquote { margin: 0; padding: 0; border: 0; }
+.st-tl-quote p { margin: 0 0 16px; font: 500 clamp(24px, 2.8vw, 34px)/1.6 "Noto Sans TC", sans-serif; letter-spacing: .06em; color: var(--tl-ink); }
+.st-tl-quote figcaption { font-size: 15px; letter-spacing: .12em; color: var(--tl-accent); }
+@media (max-width: 767px) { .st-tl-quote { grid-template-columns: 120px minmax(0, 1fr); } .st-tl-quote p { font-size: 20px; } }
+
+/* ---------- 關於崧達 entry band ---------- */
+.st-tl-teaser { padding-top: clamp(56px, 7vw, 96px) !important; padding-bottom: clamp(56px, 7vw, 96px) !important; }
+.st-tl-teaser-in { display: grid; grid-template-columns: minmax(0, 5fr) minmax(0, 6fr); gap: clamp(32px, 5vw, 72px); align-items: center; padding: 0 var(--tl-edge); }
+.st-tl-eyebrow { margin: 0 0 14px; font: 600 13px/1 Montserrat, sans-serif; letter-spacing: .24em; text-transform: uppercase; color: var(--tl-accent); }
+.st-tl-teaser h2 { margin: 0 0 16px; font: 500 clamp(30px, 3.6vw, 44px)/1.25 "Noto Sans TC", sans-serif; letter-spacing: .04em; color: var(--tl-ink); }
+.st-tl-teaser-copy p:not(.st-tl-eyebrow) { margin: 0 0 28px; font-size: 16px; line-height: 1.9; color: var(--tl-mute); }
+.st-tl-teaser-btn { display: inline-flex; align-items: center; gap: 10px; padding: 13px 26px; border-radius: 999px; background: var(--tl-accent); color: #12100F;
+  font-weight: 500; letter-spacing: .06em; text-decoration: none; transition: filter .3s var(--tl-ease); }
+.st-tl-teaser-btn:hover { filter: brightness(1.08); }
+.st-tl-teaser-marks { position: relative; display: grid; gap: 0; margin: 0; padding: 0 0 0 28px; list-style: none; }
+.st-tl-teaser-marks::before { content: ""; position: absolute; left: 5px; top: 10px; bottom: 10px; width: 2px; background: var(--tl-line); }
+.st-tl-teaser-marks li { position: relative; display: grid; grid-template-columns: 72px minmax(0, 1fr); gap: 16px; align-items: baseline;
+  padding: 16px 0; border-bottom: 1px solid var(--tl-line); font-size: 16px; color: var(--tl-ink); }
+.st-tl-teaser-marks li:last-child { border-bottom: 0; }
+.st-tl-teaser-marks li::before { content: ""; position: absolute; left: -28px; top: 22px; width: 12px; height: 12px; border-radius: 50%; background: var(--tl-bg); box-shadow: inset 0 0 0 3px var(--tl-accent); }
+.st-tl-teaser-marks span { font: 600 18px/1 Montserrat, sans-serif; letter-spacing: .04em; color: var(--tl-accent); }
+@media (max-width: 900px) { .st-tl-teaser-in { grid-template-columns: minmax(0, 1fr); } }
+
+@media (prefers-reduced-motion: reduce) { .st-tl-card, .st-tl-card::after { transition: none !important; } }
